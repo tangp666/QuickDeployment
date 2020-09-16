@@ -8,6 +8,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 用户信息
+ * @author tangpan
+ */
 @TableName("sys_user")
 public class SysUserEntity implements Serializable {
     private static final long serialVersionUID = 1L;

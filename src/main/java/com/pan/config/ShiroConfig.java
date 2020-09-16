@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * Shiro 配置文件
+ * @author tangpan
  */
 @Configuration
 public class ShiroConfig {

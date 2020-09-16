@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
+/**
+ * 用户信息dao
+ * @author tangpan
+ */
 @Mapper
 public interface SysUserDao {
     /**

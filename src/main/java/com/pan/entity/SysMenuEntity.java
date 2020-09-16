@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 菜单管理
+ * @author tangpan
  */
 @TableName("sys_menu")
 public class SysMenuEntity implements Serializable {

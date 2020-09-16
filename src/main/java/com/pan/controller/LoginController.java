@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 用户登录
+ * @author tangpan
+ */
 @Controller
 public class LoginController {
 

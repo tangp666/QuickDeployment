@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * 菜单栏目dao
+ * @author tangpan
+ */
 @Mapper
 public interface SysMenuDao {
     /**

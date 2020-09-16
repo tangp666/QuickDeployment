@@ -10,6 +10,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * 文件下载
+ * @author tangpan
+ */
 public class DownLoadUtils {
 
     /**
@@ -27,19 +31,18 @@ public class DownLoadUtils {
         //二进制长度
         int byteread = 0;
         InputStream inputStream = null;
-        FileOutputStream fos = null;
+        FileOutputStream fileOutputStream = null;
         try {
             //创建文件路径流
             URL url = new URL(downLoadFileUrl);
             URLConnection conn = url.openConnection();
             inputStream = conn.getInputStream();
             //写入文件流
-            fos = new FileOutputStream(outPutFileUrl);
+            fileOutputStream = new FileOutputStream(outPutFileUrl);
 
             byte[] buffer = new byte[1024];
             while ((byteread = inputStream.read(buffer)) > 0){
-                System.out.println(byteread);
-                fos.write(buffer,0, byteread);
+                fileOutputStream.write(buffer,0, byteread);
             }
         } catch (MalformedURLException e) {
             LOGGER.error("URL协议、格式或者路径错误");
@@ -52,8 +55,8 @@ public class DownLoadUtils {
                 if(inputStream != null){
                     inputStream.close();
                 }
-                if(fos != null){
-                    fos.close();
+                if(fileOutputStream != null){
+                    fileOutputStream.close();
                 }
             } catch (IOException e) {
                 LOGGER.error("文件流关闭失败");

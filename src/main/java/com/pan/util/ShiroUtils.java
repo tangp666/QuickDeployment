@@ -7,6 +7,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 /**
  * Shiro工具类
+ * @author tangpan
  */
 public class ShiroUtils {
     /**  加密算法 */

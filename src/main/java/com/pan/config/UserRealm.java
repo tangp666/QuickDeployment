@@ -21,6 +21,7 @@ import java.util.*;
 
 /**
  * Shiro 认证实体
+ * @author tangpan
  */
 @Component
 public class UserRealm extends AuthorizingRealm {

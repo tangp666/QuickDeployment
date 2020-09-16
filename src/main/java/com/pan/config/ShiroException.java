@@ -4,6 +4,10 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * shiro权限异常
+ * @author tangpan
+ */
 @RestControllerAdvice
 public class ShiroException {
 
