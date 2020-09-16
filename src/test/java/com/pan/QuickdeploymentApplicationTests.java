@@ -1,6 +1,7 @@
 package com.pan;
 
 import com.pan.util.DownLoadUtils;
+import com.pan.util.MVNUtils;
 import com.pan.util.ZipUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,4 +31,14 @@ class QuickdeploymentApplicationTests {
         ZipUtils.unZip("E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
     }
 
+    /**
+     * mvn打包
+     */
+    @Test
+    void testMvnPackage(){
+        MVNUtils.mvnPackage("E:\\workspace\\QuickDeployment\\file\\QuickDeployment\\QuickDeployment-master\\pom.xml",
+                //"mvn package",
+                "clean package",
+                "E:\\apache-maven-3.6.2");
+    }
 }
