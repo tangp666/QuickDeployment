@@ -19,7 +19,7 @@ class QuickdeploymentApplicationTests {
     @Test
     void testDownLoadNet(){
         DownLoadUtils.downLoadNet("https://github.com/tangp666/QuickDeployment/archive/master.zip",
-                "E:\\workspace\\QuickDeployment\\src\\main\\resources\\file\\test.zip");
+                "E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
     }
 
     /**
@@ -27,7 +27,7 @@ class QuickdeploymentApplicationTests {
      */
     @Test
     void testUnZip(){
-        ZipUtils.unZip("E:\\workspace\\QuickDeployment\\src\\main\\resources\\file\\test.zip");
+        ZipUtils.unZip("E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
     }
 
 }

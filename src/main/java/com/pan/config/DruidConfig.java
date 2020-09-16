@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 /**
  * Druid数据库连接池配置文件
- * @author
+ * @author tangpan
  */
 @Configuration
 public class DruidConfig {
