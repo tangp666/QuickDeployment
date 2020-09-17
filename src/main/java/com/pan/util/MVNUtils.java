@@ -1,5 +1,7 @@
 package com.pan.util;
 
+import com.pan.entity.ResultEntity;
+import com.pan.enums.ResultEnum;
 import org.apache.maven.shared.invoker.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ public class MVNUtils {
      * @param mvnCommand mvn执行命令
      * @param mavenHomeUrl mavenHome的路径
      */
-    public static void mvnPackage(String pomUrl, String mvnCommand, String mavenHomeUrl){
+    public static ResultEntity mvnPackage(String pomUrl, String mvnCommand, String mavenHomeUrl){
         InvocationRequest request = new DefaultInvocationRequest();
         //pom.xml文件
         //request.setPomFile(new File("E:\\workspace\\QuickDeployment\\file\\QuickDeployment\\QuickDeployment-master\\pom.xml"));
@@ -44,10 +46,18 @@ public class MVNUtils {
 //            public void consumeLine(String s) throws IOException {
 //            }
 //        });
+        int code = -1;
+        String message = "";
         //执行命令
         try {
             invoker.execute(request);
+
+            code = ResultEnum.SUCCESS.getCode();
+            message = ResultEnum.SUCCESS.getMessage();
         } catch (MavenInvocationException e) {
+            code = ResultEnum.EXCEPTION.getCode();
+            message = e.getMessage();
+            LOGGER.error("mvn打包失败");
             e.printStackTrace();
         }
 //        try{
@@ -59,5 +69,6 @@ public class MVNUtils {
 //        }catch (MavenInvocationException e) {
 //            e.printStackTrace();
 //        }
+        return new ResultEntity(code, message);
     }
 }

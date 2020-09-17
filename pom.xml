@@ -25,6 +25,9 @@
         <druid-spring-boot-starter>1.1.13</druid-spring-boot-starter>
         <druid>1.1.10</druid>
         <maven-invoker>3.0.1</maven-invoker>
+        <jsch>0.1.55</jsch>
+        <spring-boot-maven-plugin>2.3.3.RELEASE</spring-boot-maven-plugin>
+        <ganymed-ssh2>262</ganymed-ssh2>
     </properties>
 
     <dependencies>
@@ -94,6 +97,18 @@
             <artifactId>druid</artifactId>
             <version>${druid}</version>
         </dependency>
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>${jsch}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/ch.ethz.ganymed/ganymed-ssh2 -->
+        <dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>${ganymed-ssh2}</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.maven.shared/maven-invoker mvn打包 -->
         <dependency>
@@ -108,7 +123,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.3.RELEASE</version>
+                <version>${spring-boot-maven-plugin}</version>
             </plugin>
         </plugins>
         <defaultGoal>compile</defaultGoal>

@@ -1,5 +1,7 @@
 package com.pan.util;
 
+import com.pan.entity.ResultEntity;
+import com.pan.enums.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,11 +29,14 @@ public class DownLoadUtils {
      * @param outPutFileUrl 文件写入的路径
      *
      */
-    public static void downLoadNet(String downLoadFileUrl, String outPutFileUrl){
+    public static ResultEntity downLoadNet(String downLoadFileUrl, String outPutFileUrl){
         //二进制长度
         int byteread = 0;
         InputStream inputStream = null;
         FileOutputStream fileOutputStream = null;
+        //返回对象
+        int code = -1;
+        String message = "";
         try {
             //创建文件路径流
             URL url = new URL(downLoadFileUrl);
@@ -44,10 +49,16 @@ public class DownLoadUtils {
             while ((byteread = inputStream.read(buffer)) > 0){
                 fileOutputStream.write(buffer,0, byteread);
             }
+            code = ResultEnum.SUCCESS.getCode();
+            message = ResultEnum.SUCCESS.getMessage();
         } catch (MalformedURLException e) {
             LOGGER.error("URL协议、格式或者路径错误");
+            code = ResultEnum.EXCEPTION.getCode();
+            message = e.getMessage();
             e.printStackTrace();
         } catch (IOException e){
+            code = ResultEnum.EXCEPTION.getCode();
+            message = e.getMessage();
             LOGGER.error("文件流读取文件错误");
             e.printStackTrace();
         } finally {
@@ -63,5 +74,6 @@ public class DownLoadUtils {
                 e.printStackTrace();
             }
         }
+        return new ResultEntity(code, message);
     }
 }

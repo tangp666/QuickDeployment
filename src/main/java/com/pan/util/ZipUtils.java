@@ -1,5 +1,7 @@
 package com.pan.util;
 
+import com.pan.entity.ResultEntity;
+import com.pan.enums.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +29,7 @@ public class ZipUtils {
      * 解压zip文件
      * @param fileUrl 解压文件 文件路径
      */
-    public static void unZip(String fileUrl){
+    public static ResultEntity unZip(String fileUrl){
         //解压后文件路径
         String savePath = fileUrl.substring(0,fileUrl.lastIndexOf(".")) + File.separator;
         //判断当前文件路径是否存在文件夹 不存在即创建一个
@@ -35,7 +37,7 @@ public class ZipUtils {
         if(!unFile.exists()){
             unFile.mkdir();
         }
-        zip(fileUrl, savePath);
+        return zip(fileUrl, savePath);
     }
 
     /**
@@ -43,14 +45,14 @@ public class ZipUtils {
      * @param fileUrl 文件路径
      * @param descDir 文件解压位置
      */
-    public static void unZip(String fileUrl, String descDir){
+    public static ResultEntity unZip(String fileUrl, String descDir){
         //判断 解压文件夹是否存在
         File pathFile = new File(descDir);
         if(!pathFile.exists())
         {
             pathFile.mkdirs();
         }
-        zip(fileUrl, descDir);
+        return zip(fileUrl, descDir);
     }
 
     /**
@@ -58,13 +60,17 @@ public class ZipUtils {
      * @param fileUrl 解压文件路径
      * @param savePath 解压位置
      */
-    private static void zip(String fileUrl, String savePath){
+    private static ResultEntity zip(String fileUrl, String savePath){
         int count = -1;
+        //文件流
         File file = null;
         InputStream inputStream = null;
         FileOutputStream fileOutputStream = null;
         BufferedOutputStream bufferedOutputStream = null;
         ZipFile zipFile = null;
+        //返回对象
+        int code = -1;
+        String message = "";
         try {
             zipFile = new ZipFile(fileUrl);
             //File自身的遍历对象
@@ -106,8 +112,12 @@ public class ZipUtils {
                 }
                 bufferedOutputStream.flush();
             }
+            code = ResultEnum.SUCCESS.getCode();
+            message = ResultEnum.SUCCESS.getMessage();
         } catch (IOException e) {
             LOGGER.error("文件解压错误");
+            code = ResultEnum.SUCCESS.getCode();
+            message = e.getMessage();
             e.printStackTrace();
         } finally {
             try {
@@ -129,6 +139,7 @@ public class ZipUtils {
                 e.printStackTrace();
             }
         }
+        return new ResultEntity(code,message);
     }
 
 
