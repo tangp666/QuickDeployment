@@ -27,7 +27,7 @@ public class ExecCmdUtils {
      * @param userName 服务器用户名
      * @param passWord 服务器密码
      * @param prot 服务器端口号
-     * @param command 执行的命令
+     * @param command 执行的命令  命令行使用&&连接多条命令
      * @return
      */
     public static ResultEntity execCmd(String url, String userName, String passWord, int prot, String command){

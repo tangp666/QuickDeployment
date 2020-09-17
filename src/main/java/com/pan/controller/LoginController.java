@@ -8,6 +8,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,6 +26,16 @@ public class LoginController {
 
     @Resource
     private SysMenuDao sysMenuDao;
+
+    /**
+     * 项目启动默认login页面
+     * @return
+     */
+    @RequestMapping("")
+    public String login(){
+        return "login";
+    }
+
     /**
      * 登录测试
      * http://localhost:8080/userLogin?userName=admin&passWord=admin
