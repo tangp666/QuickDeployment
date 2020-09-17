@@ -12,6 +12,8 @@ public class ScpConnectEntity {
     private String passWord;
     /* 服务器url */
     private String url;
+    /* 端口号 */
+    private int prot;
     /* 目标路径 */
     private String targetPath;
 
@@ -37,6 +39,14 @@ public class ScpConnectEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getProt() {
+        return prot;
+    }
+
+    public void setProt(int prot) {
+        this.prot = prot;
     }
 
     public String getTargetPath() {
