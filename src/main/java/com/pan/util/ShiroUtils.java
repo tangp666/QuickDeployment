@@ -21,8 +21,8 @@ public class ShiroUtils {
 
     // 获取一个测试账号 admin
     public static void main(String[] args) {
-        // 3743a4c09a17e6f2829febd09ca54e627810001cf255ddcae9dabd288a949c4a
-        System.out.println(sha256("admin","123")) ;
+        // 99d5015c192a4a7cc82e800a6427febe417baad5e68ed9dd518461e9dd2714ce
+        System.out.println(sha256("123456","123"));
     }
 
     /**

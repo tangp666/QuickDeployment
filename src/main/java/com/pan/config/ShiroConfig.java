@@ -55,8 +55,10 @@ public class ShiroConfig {
         shiroFilter.setLoginUrl("/userLogin");
         shiroFilter.setUnauthorizedUrl("/");
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/userLogin", "anon");
-        shiroFilter.setFilterChainDefinitionMap(filterMap);
+        filterMap.put("/login", "anon");
+        filterMap.put("/static/css/**", "anon");
+        filterMap.put("/static/js/**", "anon");
+        filterMap.put("/static/images/**", "anon");
         return shiroFilter;
     }
     /**

@@ -10,6 +10,8 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -70,20 +72,19 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)authToken;
+        //账号
+        String username = (String) token.getPrincipal();
         //查询用户信息
-        SysUserEntity user = sysUserDao.selectOne(token.getUsername());
+        SysUserEntity user = sysUserDao.selectOne(username);
         //账号不存在
         if(user == null) {
-            throw new UnknownAccountException("账号或密码不正确");
+            throw new UnknownAccountException("账号不正确");
         }
         //账号锁定
         if(user.getStatus() == 0){
             throw new LockedAccountException("账号已被锁定,请联系管理员");
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo
-                (user, user.getPassword(),
-                        ByteSource.Util.bytes(user.getSalt()),
-                        getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
         return info;
     }
 
