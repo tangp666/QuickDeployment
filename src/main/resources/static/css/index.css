@@ -1,0 +1,111 @@
+.bodyer{height:100%; font-family: 微软雅黑;padding-left:212px; position: relative;}
+
+/*头部*/
+#header{position:relative;height:57px; background: #000; border-bottom:1px solid #333;}
+#header .logo{width:212px;height:57px;background: url(../images/logo.jpg) no-repeat center;}
+#header .welcome{display: inline-block; width:99px; height:28px;line-height:28px; margin-top:16px; color:#b8bbcc; cursor: default;}
+#header .welcome em{display: inline-block; width:28px; height:28px; margin-left:15px; background:url(../images/admin.png) no-repeat center;}
+#header .help{display: inline-block; width:99px; height:28px;line-height:28px; margin-top:16px; color:#b8bbcc; cursor: default;}
+#header .help em{display: inline-block; width:28px; height:28px; margin-left:15px; background:url(../images/help.png) no-repeat center;}
+#header .topborder{display:inline-block; width:1px; height:28px; margin-top:16px; background:url(../images/topborder.png) no-repeat center;}
+
+/*菜单栏*/
+.leftNavBox{width:212px; height:100%; position: absolute; top:0px; left:0px; z-index:11;}
+.leftNav{width:212px; height:100%; background: #212121; overflow:hidden;}
+.leftNav .bg_nav{display:block; width:192px; height:50px; line-height:50px; margin:0px 10px; color:#b8bfd3; font-size:14px; border-bottom:1px solid #1a1a1a;}
+.leftNav .bg_nav:hover{color:#fff;}
+.leftNav .bg_nav:hover em{margin-left:18px; -webkit-transition: margin-left 0.3s;-moz-transition: margin-left 0.3s;}
+.leftNav .bg_nav:hover .bar{width:100%;}
+.leftNav .bg_nav.selt{color:#fff; font-size: 16px;}
+.leftNav .bg_nav.selt em{margin-left:18px;}
+.leftNav .bg_nav.selt .bar{width: 0px;}
+.leftNav .bg_nav .bar{
+    width: 0px;
+    -webkit-transition: width .2s;
+    -moz-transition: width .2s;
+    transition: width .2s;
+    height: 2px;
+    position: absolute;
+    display: block;
+    background: #355789;
+    bottom: -1px;
+    left: 0;
+}
+.leftNav .bg_nav .btn_nav{display:inline-block; width:10px; height:14px; margin: 18px 10px 0px 0px; background:url(../images/btn_nav_arr.png) no-repeat right center; -webkit-transition: 0.8s ease 0s;-moz-transition: 0.8s ease 0s; }
+.leftNav .bg_nav:hover .btn_nav{background:url(../images/btn_nav_arr.png) no-repeat right center;}
+.leftNav .bg_nav.selt .btn_nav{margin: 18px 10px 0px 0px;transform: rotate(180deg); -webkit-transition: transform 0.8s ease 0s;-moz-transition: transform 0.8s ease 0s;}
+.leftNav .twoLevelNav{width:212px; overflow:auto;}
+.leftNav .twoLevelNav >div{display:block; padding-left:44px; height:38px;  line-height:38px; color:#b8bfd3; font-size: 12px; cursor:pointer; background: #171717;
+    box-shadow: 0px 0px #126CA1 inset;
+    -webkit-transition: box-shadow .3s, text-indent .3s;
+    transition: box-shadow .3s, text-indent .3s;
+}
+.leftNav .twoLevelNav >div em{display:inline-block; width:5px; height:38px; margin-right:10px; background: url("../images/listblue.png") no-repeat center;}
+.leftNav .twoLevelNav >div span{display:inline-block; width:140px; height:38px;}
+.leftNav .twoLevelNav >div:hover{background: #0d0d0d;
+    padding-left:50px;
+    box-shadow: 3px 0px #126CA1 inset;
+    -webkit-transition: box-shadow .3s linear, text-indent .3s linear;
+    transition: box-shadow .3s linear, text-indent .3s linear;
+}
+.leftNav .twoLevelNav >div.selt{background: #0d0d0d; border-left:3px solid #305a9f; color:#fff;}
+.leftNav .twoLevelNav >div.selt em{background: url("../images/listbluehov.png") no-repeat center;}
+.leftNav .bg_nav em{display:inline-block; width:25px; height:40px; margin-left:22px; margin-right:5px;-webkit-transition: margin-left 0.3s;-moz-transition: margin-left 0.3s; }
+.leftNav .twoLevelNav >div .positionDl{display: block; width:148px; padding:0px;position: fixed; height:0px; margin-left:0px; overflow:hidden; margin-top:0px; background: #0d0d0d; z-index:0; -webkit-transition: .3s;-moz-transition: .3s;}
+.leftNav .twoLevelNav >div:hover .positionDl{margin-left:162px; margin-top:0px; z-index:100; padding:10px 5px; height:auto; -webkit-transition: .5s;-moz-transition: .5s;}
+.leftNav .positionDl dd{height:24px; line-height: 24px;}
+.leftNav .positionDl a{display: inline-block; height:24px; line-height:24px; padding-left:23px; border: 1px solid #0d0d0d; width:125px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color:#8d94a6;}
+.leftNav .positionDl a:hover{background: url("../images/subnavicon.png") no-repeat 9px 9px; border:1px solid #373737; color:#fff;}
+.leftNav .positionDl .cur a{color:#fff;}
+.leftNav .bg_nav .icon_1{background: url("../images/navicon_1.png") no-repeat center top;}
+.leftNav .bg_nav .icon_2{background: url("../images/navicon_2.png") no-repeat center top;}
+.leftNav .bg_nav .icon_3{background: url("../images/navicon_3.png") no-repeat center top;}
+.leftNav .bg_nav .icon_4{background: url("../images/navicon_4.png") no-repeat center top;}
+.leftNav .bg_nav .icon_5{background: url("../images/navicon_5.png") no-repeat center top;}
+.leftNav .bg_nav .icon_6{background: url("../images/navicon_6.png") no-repeat center top;}
+.leftNav .bg_nav .icon_7{background: url("../images/navicon_7.png") no-repeat center top;}
+.leftNav .bg_nav .icon_8{background: url("../images/navicon_8.png") no-repeat center top;}
+.leftNav .bg_nav:hover em{background-position: center -50px;}
+.leftNav .bg_nav.selt em{background-position: center -50px;}
+.leftNav .menuText{width:118px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.leftNavBox h5{height:50px; line-height: 50px; width:212px; background: url("../images/menutop.png") no-repeat; color:#fff; font-size: 18px; text-align: center; font-weight: normal;}
+.leftNavBox h4{display: none;}.menuBottom{display: inline-block; width:212px; height:49px; background: url("../images/menubottom.png") no-repeat;}
+
+.add_tree_head_text{color:#ff6000;line-height: 26px;}
+.add_tree_cover{position: fixed;top:0;right:0;bottom:0;left:0;background: rgba(0,0,0,0.6);z-index: 1000;display: none;}
+.add_tree_cover_content{position: absolute;top:55px;left:335px;width:360px;height:222px;padding-top:28px;background: #fff;z-index: 100000;display: none;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 0px 20px rgba(47, 59, 85, 0.3);
+    -moz-box-shadow: 0 0px 20px rgba(47, 59, 85, 0.3);
+    -ms-box-shadow: 0 0px 20px rgba(47, 59, 85, 0.3);
+    -o-box-shadow: 0 0px 20px rgba(47, 59, 85, 0.3);
+    box-shadow: 0 0px 20px rgba(47, 59, 85, 0.3);
+}
+.add_tree_cover_content .img{display: block;height:102px;background: url(../images/window/treeNumTip_bg.png) no-repeat center center;margin-bottom: 10px;}
+.add_tree_cover_content .text_1{display:block;font-size: 14px;color:#3a85ff;line-height: 14px;text-align: center;margin-bottom: 10px;}
+.add_tree_cover_content .text_2{display:block;font-size: 14px;color:#3a85ff;line-height: 14px;text-align: center;}
+.add_tree_cover_content .closeBtnBox{position: absolute;bottom:0;left:0;right:0;background: #fafafa;border-top: 1px solid #f2f2f2;padding: 13px 0;}
+.add_tree_cover_content .closeBtnBox a{display: block;margin: 0 auto;}
+
+/*展开收起*/
+.slideBtn{display: inline-block; width:30px; height:49px; background: url("../images/slidebtnslt.png") no-repeat center; cursor:pointer; margin-left:20px;}
+.slideBtn:hover{background: url("../images/slidebtnslthov.png") no-repeat center;}
+.bodyer.normal{height:100%; font-family: 微软雅黑;padding-left:0px; position: relative; background: #e7eaf1; padding:0px 10px 0px 10px;}
+.bodyer.sm{height:100%; font-family: 微软雅黑;padding-left:70px; position: relative;}
+.sm .leftNavBox{width:70px; height:100%; overflow:hidden; position: absolute; top:0px; left:0px; z-index:11;}
+.sm .leftNav{width:87px; height:100%; background: #212121; overflow: auto;}
+.sm .leftNav .bg_nav{display:block; width:62px; height:50px; line-height:50px; margin-left:4px; margin-right:0px; color:#b8bfd3; font-size:14px; border-bottom:1px solid #1a1a1a;}
+.sm .leftNav .bg_nav:hover{color:#fff;}
+.sm  .leftNav .bg_nav.selt{color:#fff;}
+.sm .leftNav .bg_nav .btn_nav{display:none;}
+.sm .leftNav .bg_nav:hover .btn_nav{}
+.sm .leftNav .bg_nav.selt .btn_nav{}
+/*.sm .leftNav .twoLevelNav{display: none;}*/
+.sm .leftNav .bg_nav em{display:inline-block; width:25px; height:40px; margin-left:18px; margin-right:5px;}
+.sm .leftNav .menuText{display: none;}
+.sm .leftNavBox h5{display: none;}
+.sm .leftNavBox h4{display: block; height:50px; line-height: 50px; width:70px; background: url("../images/menutophov.png") no-repeat;}
+.sm .slideBtn{display: inline-block; width:30px; height:49px; background: url("../images/slidebtn.png") no-repeat center; cursor:pointer; margin-left:20px;}
+.sm .slideBtn:hover{background: url("../images/slidebtnhov.png") no-repeat center;}

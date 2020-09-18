@@ -12,12 +12,29 @@
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.jscrollpane.js"></script>
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.masonry.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" media="all" href="/static/css/global.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/static/css/index.css" />
 </head>
 
 <body>
+	<!--透明蒙板-->
+	<div class="add_tree_cover"></div>
+
+	<!--头部 start-->
+	<div id="header">
+		<a href="" class="left logo" target="_blank"></a>
+		<a href="javascript:;" class="right logout"></a>
+		<span class="topborder right"></span>
+		<a href="javascript:;" class="right help"><em class="left"></em>帮助</a>
+		<span class="topborder right"></span>
+		<a href="javascript:;" class="right welcome"><em class="left"></em>Admin</a>
+	</div>
+	<!--头部 end-->
+
 	<div id="main">
 		<!--身部 start-->
-		<div class="bodyer J_bodyer" id="bodyer">
+		<div class="bodyer" id="bodyer">
 			<div class="leftNavBox">
 				<h5>快捷部署</h5>
 				<h4></h4>
@@ -125,7 +142,7 @@
 				</div>
 				<!-- 展开收起按钮-->
 			</div>
-			<div class="rightManager" id="rightManager" style="height:600px;">
+			<div class="rightManager" id="rightManager" style="height:810px;">
 
 			</div>
 		</div>
