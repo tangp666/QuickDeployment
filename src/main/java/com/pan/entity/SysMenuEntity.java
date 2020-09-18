@@ -11,19 +11,19 @@ import java.io.Serializable;
 public class SysMenuEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    /* 父节点id */
     private Long parentId;
-
+    /* 菜单名称 */
     private String name;
-
+    /* 菜单路径 */
     private String url;
-
+    /* shiro授权(多个用逗号分隔，如：user:list,user:create) */
     private String perms;
-
+    /* 菜单类型   0：目录   1：菜单   2：按钮  */
     private Integer type;
-
+    /* 图标路径 */
     private String icon;
-
+    /* 排序 */
     private Integer orderNum;
 
     public Long getParentId() {

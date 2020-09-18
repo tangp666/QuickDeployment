@@ -10,20 +10,11 @@ import java.util.List;
  * @author tangpan
  */
 @Mapper
-public interface SysUserDao {
-    /**
-     * 查询用户的所有权限
-     * @param userId  用户ID
-     */
-    List<String> queryAllPerms(Long userId);
+public interface SysUserDao extends BaseDao<SysUserEntity>{
 
     /**
      * 根据用户名查询用户
      */
-    SysUserEntity selectOne(@Param("userName") String userName) ;
+    List<SysUserEntity> selectAccount(@Param("userName") String userName) ;
 
-    /**
-     * 查询用户的所有菜单ID
-     */
-    List<Long> queryAllMenuId(Long userId);
 }

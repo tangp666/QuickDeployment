@@ -12,19 +12,18 @@ import java.util.Date;
 @TableName("sys_user")
 public class SysUserEntity extends BaseEntity implements Serializable {
 
+    /* 用户名 */
     private String username;
-
+    /* 密码 */
     private String password;
-
+    /* 加盐密码 随机生成 */
     private String salt;
-
-    private String email;
-
-    private String mobile;
-
+    /* 账号状态 */
     private Integer status;
-
+    /* 创建时间 */
     private Date createTime;
+    /* 创建用户 */
+    private long createUserId;
 
     public void setUsername(String username) {
         this.username = username;
@@ -40,22 +39,6 @@ public class SysUserEntity extends BaseEntity implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getMobile() {
-        return mobile;
     }
 
     public void setStatus(Integer status) {
@@ -80,5 +63,13 @@ public class SysUserEntity extends BaseEntity implements Serializable {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(long createUserId) {
+        this.createUserId = createUserId;
     }
 }

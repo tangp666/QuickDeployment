@@ -71,7 +71,7 @@ public class LoginController {
     @RequestMapping("/menu/list")
     @RequiresPermissions("sys:user:shiro")
     public List list(){
-        return sysMenuDao.selectList() ;
+        return sysMenuDao.findALL() ;
     }
 
     /**
@@ -81,7 +81,7 @@ public class LoginController {
     @RequestMapping("/menu/list2")
     @RequiresPermissions("ccc:ddd:bbb")
     public List list2(){
-        return sysMenuDao.selectList() ;
+        return sysMenuDao.findALL() ;
     }
 
     /**

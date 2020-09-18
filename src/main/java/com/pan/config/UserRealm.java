@@ -46,7 +46,7 @@ public class UserRealm extends AuthorizingRealm {
         }
         List<String> permsList;
         //默认用户拥有最高权限
-        List<SysMenuEntity> menuList = sysMenuDao.selectList();
+        List<SysMenuEntity> menuList = sysMenuDao.findALL();
         permsList = new ArrayList<>(menuList.size());
         for(SysMenuEntity menu : menuList){
             permsList.add(menu.getPerms());
@@ -75,7 +75,11 @@ public class UserRealm extends AuthorizingRealm {
         //账号
         String username = (String) token.getPrincipal();
         //查询用户信息
-        SysUserEntity user = sysUserDao.selectOne(username);
+        List<SysUserEntity> users = sysUserDao.selectAccount(username);
+        SysUserEntity user = new SysUserEntity();
+        if (users != null && users.size() > 0){
+            user = users.get(0);
+        }
         //账号不存在
         if(user == null) {
             throw new UnknownAccountException("账号不正确");

@@ -6,8 +6,9 @@ package com.pan.entity;
  */
 public class ResultEntity {
 
+    /* 编码 */
     private int code;
-
+    /* 消息 */
     private String message;
 
     public ResultEntity() {
