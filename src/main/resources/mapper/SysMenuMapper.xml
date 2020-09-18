@@ -23,8 +23,11 @@
         <if test="url != null and url != ''">
             and url like comcat('%', #{url} ,'%')
         </if>
-        <if test="type != null and type != ''">
-            and type in (#{type})
+        <if test="menuType != null and menuType.size > 0">
+            and type in
+            <foreach collection="menuType" item="type" open="(" close=")" separator=",">
+                #{type}
+            </foreach>
         </if>
     </select>
     <!-- 插入信息 -->

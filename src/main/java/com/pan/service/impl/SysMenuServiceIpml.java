@@ -49,10 +49,10 @@ public class SysMenuServiceIpml extends BaseServiceImpl<SysMenuEntity> implement
      * @return
      */
     @Override
-    public List<SysMenuQuery> findMenuTreeByUser(long userId, String menuType) {
+    public List<SysMenuQuery> findMenuTreeByUser(long userId, List<Integer> menuType) {
         Map<String,Object> map = new HashMap<>();
         map.put("userId", userId);
-        map.put("type", menuType);
+        map.put("menuType", menuType);
         List<SysMenuEntity> menuEntities = sysMenuDao.findByParames(map);
 
         List<SysMenuQuery> menuList = new ArrayList<>();

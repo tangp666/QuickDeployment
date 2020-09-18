@@ -26,9 +26,9 @@ public interface SysMenuService {
     /**
      * 通过用户信息获取系统菜单树结构
      * @param userId 用户id
-     * @param menuType 菜单类型  1,2 表示菜单和按钮   类型用逗号隔开  如果为空或为null对象查询所有
+     * @param menuType 菜单类型  0,1,2 表示菜单和按钮  如果为空或为null对象查询所有
      * @return
      */
-    List<SysMenuQuery> findMenuTreeByUser(long userId, String menuType);
+    List<SysMenuQuery> findMenuTreeByUser(long userId, List<Integer> menuType);
 
 }

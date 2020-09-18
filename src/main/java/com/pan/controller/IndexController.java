@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/index")
-public class IndexController {
+public class IndexController extends BaseController{
 
     /**
      * 日志
@@ -36,7 +37,10 @@ public class IndexController {
      */
     @RequestMapping()
     public String index(Model model){
-        List<SysMenuQuery> menuTreeList = sysMenuService.findMenuTreeByUser(ShiroUtils.getUserId(), MacroelementUtils.ZEROandONE);
+        List<Integer> typeList = new ArrayList<>();
+        typeList.add(MacroelementUtils.ONE);
+        typeList.add(MacroelementUtils.ZERO);
+        List<SysMenuQuery> menuTreeList = sysMenuService.findMenuTreeByUser(ShiroUtils.getUserId(),typeList);
         model.addAttribute("menuTreeList", menuTreeList);
         return "index";
     }

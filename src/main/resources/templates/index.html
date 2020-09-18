@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="X_UA-Compatible" content="IE=edge,chrome=1" />
@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.jscrollpane.js"></script>
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="/static/js/global.js"></script>
 
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/global.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/index.css" />
@@ -39,102 +40,26 @@
 				<h5>快捷部署</h5>
 				<h4></h4>
 				<div class="leftNav" id="leftNavMenu">
-					<a href="javascript:;" class="bg_nav clearfix relative selt" data-value="indexPage">
-						<em class="icon_1 left"></em>
+					<!-- 首页不进行控制 -->
+					<a href="javascript:;" class="bg_nav clearfix selt" data-value="indexPage">
+						<em class="icon left"></em>
 						<span class="menuText left">首页</span>
 						<span class="btn_nav right hide"></span>
 						<div class="bar"></div>
 					</a>
-					<a href="javascript:;" class="bg_nav clearfix relative">
-						<em class="icon_2 left"></em>
-						<span class="menuText left">配置管理</span>
-						<span class="btn_nav right"></span>
-						<div class="bar"></div>
-					</a>
-					<div class="twoLevelNav pos_2" style="display: none;">
-						<div href="javascript:;" class="clearfix relative" data-value="validateRules">
-							<em class="left"></em>
-							<span class="left hideText">业务配置</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="vocabularyManage">
-							<em class="left"></em>
-							<span class="left hideText">运维配置</span>
-						</div>
-					</div>
-					<a href="javascript:;" class="bg_nav clearfix relative" data-value="dataAcquisitionManage">
-						<em class="icon_3 left"></em>
-						<span class="menuText left">质检数据采集</span>
+					<a th:each="menu : ${menuTreeList}" class="bg_nav clearfix relative" th:data-value="${menu.url}">
+						<em class="icon left"></em>
+						<span class="menuText left" th:text="${menu.name}"></span>
 						<span class="btn_nav right hide"></span>
 						<div class="bar"></div>
+						<!-- 下级菜单 -->
+						<div th:if="${menu.childMenu.size() > 0}"  class="twoLevelNav pos_2" style="display: none;">
+							<div th:each="childmenu : ${menu.childMenu}"  href="javascript:;" class="clearfix relative" th:data-value="${childmenu.url}">
+								<em class="left"></em>
+								<span class="left hideText" th:text="${childmenu.name}"></span>
+							</div>
+						</div>
 					</a>
-					<a href="javascript:;" class="bg_nav clearfix relative" data-value="dataQualityVerifManage">
-						<em class="icon_4 left"></em>
-						<span class="menuText left">数据质量核验</span>
-						<span class="btn_nav right hide"></span>
-						<div class="bar"></div>
-					</a>
-					<a href="javascript:;" class="bg_nav clearfix relative"  data-value="reportManage">
-						<em class="icon_5 left"></em>
-						<span class="menuText left">报告管理</span>
-						<span class="btn_nav right"></span>
-						<div class="bar"></div>
-					</a>
-					<div class="twoLevelNav pos_2" style="display: none;">
-						<div href="javascript:;" class="clearfix relative" data-value="fullStatistics">
-							<em class="left"></em>
-							<span class="left hideText">全量统计报告</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="optimizeTraceTaskManage">
-							<em class="left"></em>
-							<span class="left hideText">采样数据报告</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="followAnalysis">
-							<em class="left"></em>
-							<span class="left hideText">综合分析报告</span>
-						</div>
-					</div>
-					<a href="javascript:;" class="bg_nav clearfix relative"  data-value="alarmManage">
-						<em class="icon_6 left"></em>
-						<span class="menuText left">告警管理</span>
-						<span class="btn_nav right hide"></span>
-						<div class="bar"></div>
-					</a>
-					<a href="javascript:;" class="bg_nav clearfix relative">
-						<em class="icon_7 left"></em>
-						<span class="menuText left">质量优化跟踪</span>
-						<span class="btn_nav right"></span>
-						<div class="bar"></div>
-					</a>
-					<div class="twoLevelNav pos_2" style="display: none;">
-						<div href="javascript:;" class="clearfix relative" data-value="optimizeTraceConfig">
-							<em class="left"></em>
-							<span class="left hideText">优化跟踪配置</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="optimizeTraceTaskManage">
-							<em class="left"></em>
-							<span class="left hideText">优化跟踪任务</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="followAnalysis">
-							<em class="left"></em>
-							<span class="left hideText">优化跟踪分析</span>
-						</div>
-					</div>
-					<a href="javascript:;" class="bg_nav clearfix relative">
-						<em class="icon_8 left"></em>
-						<span class="menuText left">质量知识库管理</span>
-						<span class="btn_nav right"></span>
-						<div class="bar"></div>
-					</a>
-					<div class="twoLevelNav pos_2" style="display: none;">
-						<div href="javascript:;" class="clearfix relative" data-value="policyKnowledgeBaseManage">
-							<em class="left"></em>
-							<span class="left hideText">策略知识库</span>
-						</div>
-						<div href="javascript:;" class="clearfix relative" data-value="KnowledgeBaseContentManage">
-							<em class="left"></em>
-							<span class="left hideText">质量知识库内容</span>
-						</div>
-					</div>
 				</div>
 				<!-- 展开收起按钮-->
 				<div class="menuBottom">

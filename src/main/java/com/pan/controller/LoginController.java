@@ -22,12 +22,9 @@ import java.util.List;
  * @author tangpan
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController{
 
     private static Logger LOGGER = LoggerFactory.getLogger(LoginController.class) ;
-
-    @Resource
-    private SysMenuDao sysMenuDao;
 
     /**
      * 项目启动默认login页面
@@ -39,8 +36,16 @@ public class LoginController {
     }
 
     /**
-     * 登录测试
-     * http://localhost:8080/userLogin?userName=admin&passWord=admin
+     * 项目启动默认login页面
+     * @return
+     */
+    @RequestMapping("login")
+    public String login2(){
+        return "login";
+    }
+
+    /**
+     * 登录
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -64,33 +69,12 @@ public class LoginController {
     }
 
     /**
-     * 服务器每次重启请求该接口之前必须先请求上面登录接口
-     * http://localhost:8080/menu/list 获取所有菜单列表
-     * 权限要求：sys:user:shiro
+     * 退出
      */
-    @RequestMapping("/menu/list")
-    @RequiresPermissions("sys:user:shiro")
-    public List list(){
-        return sysMenuDao.findALL() ;
-    }
-
-    /**
-     * 用户没有该权限，无法访问
-     * 权限要求：ccc:ddd:bbb
-     */
-    @RequestMapping("/menu/list2")
-    @RequiresPermissions("ccc:ddd:bbb")
-    public List list2(){
-        return sysMenuDao.findALL() ;
-    }
-
-    /**
-     * 退出测试
-     */
-    @RequestMapping("/userLogOut")
+    @RequestMapping("/loginOut")
     public String logout (){
         ShiroUtils.logout();
-        return "success" ;
+        return "index" ;
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
  * @author tangpan
  */
 @Controller
-public class MenuComtroller {
+public class MenuComtroller extends BaseController{
 
     /**
      * 日志

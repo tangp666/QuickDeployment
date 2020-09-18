@@ -38,8 +38,7 @@ public class UserRealm extends AuthorizingRealm {
      * 获取用户权限集合
      */
     @Override
-    public AuthorizationInfo doGetAuthorizationInfo
-    (PrincipalCollection principals) {
+    public AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SysUserEntity user = (SysUserEntity)principals.getPrimaryPrincipal();
         if(user == null) {
             throw new UnknownAccountException("账号不存在");

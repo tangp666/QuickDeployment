@@ -12,7 +12,7 @@
 /*菜单栏*/
 .leftNavBox{width:212px; height:100%; position: absolute; top:0px; left:0px; z-index:11;}
 .leftNav{width:212px; height:100%; background: #212121; overflow:hidden;}
-.leftNav .bg_nav{display:block; width:192px; height:50px; line-height:50px; margin:0px 10px; color:#b8bfd3; font-size:14px; border-bottom:1px solid #1a1a1a;}
+.leftNav .bg_nav{display:block; width:192px; /*height:50px;*/ line-height:50px; margin:0px 10px; color:#b8bfd3; font-size:14px; border-bottom:1px solid #1a1a1a;}
 .leftNav .bg_nav:hover{color:#fff;}
 .leftNav .bg_nav:hover em{margin-left:18px; -webkit-transition: margin-left 0.3s;-moz-transition: margin-left 0.3s;}
 .leftNav .bg_nav:hover .bar{width:100%;}
@@ -41,7 +41,7 @@
     transition: box-shadow .3s, text-indent .3s;
 }
 .leftNav .twoLevelNav >div em{display:inline-block; width:5px; height:38px; margin-right:10px; background: url("../images/listblue.png") no-repeat center;}
-.leftNav .twoLevelNav >div span{display:inline-block; width:140px; height:38px;}
+.leftNav .twoLevelNav >div span{display:inline-block; width:120px; height:38px;}
 .leftNav .twoLevelNav >div:hover{background: #0d0d0d;
     padding-left:50px;
     box-shadow: 3px 0px #126CA1 inset;
@@ -50,13 +50,14 @@
 }
 .leftNav .twoLevelNav >div.selt{background: #0d0d0d; border-left:3px solid #305a9f; color:#fff;}
 .leftNav .twoLevelNav >div.selt em{background: url("../images/listbluehov.png") no-repeat center;}
-.leftNav .bg_nav em{display:inline-block; width:25px; height:40px; margin-left:22px; margin-right:5px;-webkit-transition: margin-left 0.3s;-moz-transition: margin-left 0.3s; }
+.leftNav .bg_nav em{display:inline-block; width:25px; height:40px; margin-left:10px; margin-right:5px;-webkit-transition: margin-left 0.3s;-moz-transition: margin-left 0.3s; }
 .leftNav .twoLevelNav >div .positionDl{display: block; width:148px; padding:0px;position: fixed; height:0px; margin-left:0px; overflow:hidden; margin-top:0px; background: #0d0d0d; z-index:0; -webkit-transition: .3s;-moz-transition: .3s;}
 .leftNav .twoLevelNav >div:hover .positionDl{margin-left:162px; margin-top:0px; z-index:100; padding:10px 5px; height:auto; -webkit-transition: .5s;-moz-transition: .5s;}
 .leftNav .positionDl dd{height:24px; line-height: 24px;}
 .leftNav .positionDl a{display: inline-block; height:24px; line-height:24px; padding-left:23px; border: 1px solid #0d0d0d; width:125px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color:#8d94a6;}
 .leftNav .positionDl a:hover{background: url("../images/subnavicon.png") no-repeat 9px 9px; border:1px solid #373737; color:#fff;}
 .leftNav .positionDl .cur a{color:#fff;}
+.leftNav .bg_nav .icon{background: no-repeat center top;}
 .leftNav .bg_nav .icon_1{background: url("../images/navicon_1.png") no-repeat center top;}
 .leftNav .bg_nav .icon_2{background: url("../images/navicon_2.png") no-repeat center top;}
 .leftNav .bg_nav .icon_3{background: url("../images/navicon_3.png") no-repeat center top;}
