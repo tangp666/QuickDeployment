@@ -1,23 +1,16 @@
 package com.pan.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 用户信息
  * @author tangpan
  */
 @TableName("sys_user")
-public class SysUserEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @TableId
-    private Long userId;
+public class SysUserEntity extends BaseEntity implements Serializable {
 
     private String username;
 
@@ -31,23 +24,7 @@ public class SysUserEntity implements Serializable {
 
     private Integer status;
 
-    @TableField(exist=false)
-    private List<Long> roleIdList;
-
     private Date createTime;
-
-    private Long deptId;
-
-    @TableField(exist=false)
-    private String deptName;
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -97,35 +74,11 @@ public class SysUserEntity implements Serializable {
         return createTime;
     }
 
-    public List<Long> getRoleIdList() {
-        return roleIdList;
-    }
-
-    public void setRoleIdList(List<Long> roleIdList) {
-        this.roleIdList = roleIdList;
-    }
-
     public String getSalt() {
         return salt;
     }
 
     public void setSalt(String salt) {
         this.salt = salt;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
     }
 }

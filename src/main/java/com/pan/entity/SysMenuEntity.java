@@ -1,27 +1,18 @@
 package com.pan.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
-import java.util.List;
-
 /**
  * 菜单管理
  * @author tangpan
  */
 @TableName("sys_menu")
-public class SysMenuEntity implements Serializable {
+public class SysMenuEntity extends BaseEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    @TableId
-    private Long menuId;
-
     private Long parentId;
-
-    @TableField(exist=false)
-    private String parentName;
 
     private String name;
 
@@ -35,38 +26,12 @@ public class SysMenuEntity implements Serializable {
 
     private Integer orderNum;
 
-    @TableField(exist=false)
-    private Boolean open;
-
-    @TableField(exist=false)
-    private List<?> list;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Long getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
-
     public Long getParentId() {
         return parentId;
     }
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
     }
 
     public String getName() {
@@ -115,21 +80,5 @@ public class SysMenuEntity implements Serializable {
 
     public void setOrderNum(Integer orderNum) {
         this.orderNum = orderNum;
-    }
-
-    public Boolean getOpen() {
-        return open;
-    }
-
-    public void setOpen(Boolean open) {
-        this.open = open;
-    }
-
-    public List<?> getList() {
-        return list;
-    }
-
-    public void setList(List<?> list) {
-        this.list = list;
     }
 }
