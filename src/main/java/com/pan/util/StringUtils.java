@@ -1,7 +1,5 @@
 package com.pan.util;
 
-import freemarker.template.utility.StringUtil;
-
 /**
  * String对象方法
  * @author tangpan

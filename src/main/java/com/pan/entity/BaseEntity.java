@@ -1,6 +1,6 @@
 package com.pan.entity;
 
-import com.baomidou.mybatisplus.annotations.TableId;
+import javax.persistence.Id;
 
 /**
  * 通用实体
@@ -10,7 +10,7 @@ public class BaseEntity {
     //序列
     private static final long serialVersionUID = 1L;
 
-    @TableId
+    @Id
     private Long id;
     //当前页条数
     private int limit;

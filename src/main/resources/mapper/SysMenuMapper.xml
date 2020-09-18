@@ -24,7 +24,7 @@
             and url like comcat('%', #{url} ,'%')
         </if>
         <if test="type != null and type != ''">
-            and type = #{type}
+            and type in (#{type})
         </if>
     </select>
     <!-- 插入信息 -->

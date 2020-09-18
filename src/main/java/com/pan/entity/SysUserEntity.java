@@ -1,7 +1,8 @@
 package com.pan.entity;
 
-import com.baomidou.mybatisplus.annotations.TableName;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,20 +10,26 @@ import java.util.Date;
  * 用户信息
  * @author tangpan
  */
-@TableName("sys_user")
+@Table(name = "sys_user")
 public class SysUserEntity extends BaseEntity implements Serializable {
 
     /* 用户名 */
+    @Column(name = "username")
     private String username;
     /* 密码 */
+    @Column(name = "password")
     private String password;
     /* 加盐密码 随机生成 */
+    @Column(name = "salt")
     private String salt;
     /* 账号状态 */
+    @Column(name = "status")
     private Integer status;
     /* 创建时间 */
+    @Column(name = "create_time")
     private Date createTime;
     /* 创建用户 */
+    @Column(name = "create_user_id")
     private long createUserId;
 
     public void setUsername(String username) {
@@ -72,4 +79,6 @@ public class SysUserEntity extends BaseEntity implements Serializable {
     public void setCreateUserId(long createUserId) {
         this.createUserId = createUserId;
     }
+
+
 }
