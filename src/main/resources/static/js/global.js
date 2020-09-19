@@ -3,46 +3,7 @@
  * 		初始化 
  */
 $(function() {
-    //一级导航点击事件
-    $('.bg_nav').on('click', function(){
-        var module = $(this).attr('data-value');
 
-        if(!$(this).hasClass('selt')){
-        	//删除所有的selt
-			$('.selt').removeClass('selt');
-
-            $(this).addClass('selt');
-            $(this).siblings('a').removeClass('selt');
-			//关闭所有二级菜单
-            closeAllposDiv();
-
-            //展开下级菜单
-            var length = this.children.length;
-            for(var i = 0;i < length; i++){
-                if(this.children[i].className .indexOf("pos_2") > 0){
-                    this.children[i].style.display = 'block'
-                }
-            }
-        }else{
-            $('.selt').removeClass('selt');
-            //关闭所有二级菜单
-            closeAllposDiv();
-        }
-    });
-    //关闭所有二级菜单
-    function closeAllposDiv(){
-        var length = $('.pos_2').length
-        for(var i = 0;i < length; i++){
-            if($('.pos_2')[i].className .indexOf("pos_2") > 0){
-                $('.pos_2')[i].style.display = 'none'
-            }
-        }
-	}
-
-    //二级导航点击事件
-    $('.twoLevelNav>div').on('click', function(){
-
-    });
 
 	
 	$(document).off("click.radio").on("click.radio",".radio",function(){

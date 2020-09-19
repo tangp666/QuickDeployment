@@ -5,15 +5,15 @@
 	<meta http-equiv="X_UA-Compatible" content="IE=edge,chrome=1" />
 	<title>快捷部署 - 首页</title>
 	<link rel="stylesheet" type="text/css" href="/static/js/jscrollpane/jquery.jscrollpane.css" />
-	<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.placeholder.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.debouncedresize.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.throttledresize.js"></script>
+	<script type="text/javascript" src="/static/js/plugins/jQuery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugins/jQuery/jquery.placeholder.js"></script>
+	<script type="text/javascript" src="/static/js/plugins/jQuery/jquery.debouncedresize.js"></script>
+	<script type="text/javascript" src="/static/js/plugins/jQuery/jquery.throttledresize.js"></script>
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.jscrollpane.js"></script>
 	<script type="text/javascript" src="/static/js/jscrollpane/jquery.mousewheel.js"></script>
-	<script type="text/javascript" src="/static/js/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="/static/js/plugins/jQuery/jquery.masonry.min.js"></script>
 	<script type="text/javascript" src="/static/js/global.js"></script>
-
+	<script type="text/javascript" src="/static/js/Index/index.js"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/global.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/static/css/index.css" />
 </head>
@@ -68,7 +68,10 @@
 				<!-- 展开收起按钮-->
 			</div>
 			<div class="rightManager" id="rightManager" style="height:810px;">
-
+				<iframe class="J_iframe" name="iframe0" width="100%" height="100%"
+						th:src="@{/main}" frameborder="0" data-id="index.html"
+						seamless></iframe>
+				<input hidden value="" id="parames" type="text"/>
 			</div>
 		</div>
 	</div>
