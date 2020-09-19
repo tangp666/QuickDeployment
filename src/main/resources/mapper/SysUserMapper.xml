@@ -9,9 +9,22 @@
     <select id="findALL" resultType="com.pan.entity.SysUserEntity">
         select * from sys_user
     </select>
+    <!-- 查询所有用户信息 -->
+    <select id="countAll" resultType="com.pan.entity.SysUserEntity">
+        select count(1) from sys_user
+    </select>
     <!-- 根加条件查询用户信息 -->
     <select id="findByParames" resultType="com.pan.entity.SysUserEntity" parameterType="java.util.Map">
         select * from sys_user
+        where  1 = 1
+        <if test="username != null and username != ''">and username like comcat('%', #{username}, '%')</if>
+        <if test="status != null and status != ''">and status = #{status}</if>
+        <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
+        <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+    </select>
+    <!-- 根加条件查询用户信息 -->
+    <select id="countByParames" resultType="com.pan.entity.SysUserEntity" parameterType="java.util.Map">
+        select count(1) from sys_user
         where  1 = 1
         <if test="username != null and username != ''">and username like comcat('%', #{username}, '%')</if>
         <if test="status != null and status != ''">and status = #{status}</if>

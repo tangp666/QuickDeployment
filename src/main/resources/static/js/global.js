@@ -3,9 +3,6 @@
  * 		初始化 
  */
 $(function() {
-
-
-	
 	$(document).off("click.radio").on("click.radio",".radio",function(){
 		$(this).addClass("slt").siblings().removeClass("slt");
 	})

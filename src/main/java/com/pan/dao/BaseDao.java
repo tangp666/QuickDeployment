@@ -1,6 +1,5 @@
 package com.pan.dao;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +19,24 @@ public interface BaseDao<T>{
     List<T> findALL();
 
     /**
+     * 查询所有数量
+     * @return
+     */
+    int countAll();
+
+    /**
      * 根据参数条件查询
      * @param map 参数条件
      * @return 对象集合
      */
     List<T> findByParames(Map<String,Object> map);
+
+    /**
+     * 根据条件查询所有数量
+     * @param map
+     * @return
+     */
+    int countByParames(Map<String,Object> map);
 
     /**
      * 插入

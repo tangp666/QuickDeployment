@@ -9,12 +9,7 @@ import java.util.List;
  * 系统菜单管理
  * @author tangpan
  */
-public interface SysMenuService {
-
-    /**
-     *  获取所有的系统菜单
-     */
-    List<SysMenuEntity> findAllMenu();
+public interface SysMenuService extends BaseService<SysMenuEntity> {
 
     /**
      * 通过用户获取系统菜单

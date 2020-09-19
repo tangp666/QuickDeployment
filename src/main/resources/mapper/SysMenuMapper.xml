@@ -10,6 +10,11 @@
     <select id="findALL" resultType="com.pan.entity.SysMenuEntity">
         select * from sys_menu
     </select>
+    <!-- 查询所有的菜单信息数量 -->
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from sys_menu
+    </select>
+
     <!-- 通过菜单条件查询菜单信息集合 -->
     <select id="findByParames" resultType="com.pan.entity.SysMenuEntity" parameterType="java.util.Map">
         select * from sys_menu
@@ -29,7 +34,32 @@
                 #{type}
             </foreach>
         </if>
+        <if test="limit != null and offset != null">
+            LIMIT #{offset} , #{limit}
+        </if>
     </select>
+
+    <!-- 通过菜单条件查询菜单信息数量 -->
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from sys_menu
+        where 1 = 1
+        <if test="parentId != null and parentId != ''">
+            and parent_id = #{parentId}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="url != null and url != ''">
+            and url like comcat('%', #{url} ,'%')
+        </if>
+        <if test="menuType != null and menuType.size > 0">
+            and type in
+            <foreach collection="menuType" item="type" open="(" close=")" separator=",">
+                #{type}
+            </foreach>
+        </if>
+    </select>
+
     <!-- 插入信息 -->
     <insert id="insert" parameterType="com.pan.entity.SysMenuEntity">
         insert into sys_menu(parent_id, name, url, perms, type, icon, order_num) values (#{parentId}, #{name}, #{url}, #{perms}, #{type}, #{icon}, #{orderNum});

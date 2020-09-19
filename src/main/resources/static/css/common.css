@@ -1,0 +1,170 @@
+/*表格样式修改*/
+.row {
+    margin: 0;
+}
+.ibox {
+    margin-bottom: 0;
+    position: relative;
+}
+
+.ibox-title{
+    border-color: #ffffff;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+td .btn {
+    margin: 2px 0;
+}
+
+table tbody {
+    display:block;
+    overflow-y: -webkit-paged-y;
+}
+
+
+table thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+
+table thead{
+    /*width: calc( 100% - 6px )*/
+}
+
+table {
+    background-color: #b5cee4;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
+    background-color: #b5cee4;
+}
+
+table tbody{
+    background-color: white;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center !important;
+    padding-bottom: 10px !important;
+    border-bottom: #e7eaec solid 1px;
+    color: blue;
+}
+
+#statusStr {
+    position: absolute;
+    color: blue;
+    font-size: 12px;
+    border-radius: 66%;
+    border: 2px #247eb7 solid;
+    height: 25px;
+    line-height: 22px;
+    left: 20px;
+    padding: 0 10px;
+}
+
+
+#executed_state {
+    position: absolute;
+    color: blue;
+    font-size: 12px;
+    border-radius: 66%;
+    border: 2px #247eb7 solid;
+    height: 25px;
+    line-height: 22px;
+    left: 30px;
+
+    padding: 0 10px;
+}
+
+thead {
+    background-color: #b5cee4;
+}
+
+
+
+.bootstrap-table .table, .bootstrap-table .table>tbody>tr>td, .bootstrap-table .table>tbody>tr>th, .bootstrap-table .table>tfoot>tr>td, .bootstrap-table .table>tfoot>tr>th, .bootstrap-table .table>thead>tr>td{
+    padding: 2px!important;
+    height: 36px!important;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.bootstrap-table .table thead>tr>th {
+    padding: 0!important;
+}
+
+.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner{
+padding: 6px 8px;
+}
+
+.btn {
+padding: 4px 8px;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+/*padding: 6px;*/
+}
+
+/*复选框样式*/
+.check-status {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
+.check-status input{
+    vertical-align: middle;
+    margin-top: 0;
+}
+
+.fixed-table-toolbar {
+    background-color: white;
+    padding: 0 15px;
+}
+
+.bootstrap-table .fixed-table-toolbar{
+    display: none;
+}
+
+.ibox-body .fixed-table-toolbar .form-group {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.imgBox{
+    height: auto;
+    min-height: 200px;
+}
+
+.form-group {
+    min-width: 350px;
+}
+
+.clearfix {
+    zoom: 1;
+}
+.clearfix:before,.clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.clearfix:after {
+    clear: both;
+}
+
+.fixed-table-toolbar .form-group {
+    padding: 0;
+}
+
+.bs-checkbox {
+    width: 36px;
+}
+
