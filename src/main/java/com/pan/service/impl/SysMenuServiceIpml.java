@@ -18,13 +18,54 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("sysMenuService")
-public class SysMenuServiceIpml extends BaseServiceImpl<SysMenuEntity> implements SysMenuService {
+public class SysMenuServiceIpml implements SysMenuService {
 
-    private SysMenuDao sysMenuDao;
     @Resource
-    public void setSysMenuDao(SysMenuDao sysMenuDao) {
-        this.sysMenuDao = sysMenuDao;
-        super.setBaseDao(sysMenuDao);
+    private SysMenuDao sysMenuDao;
+
+    @Override
+    public SysMenuEntity findById(long id) {
+        return sysMenuDao.findById(id);
+    }
+
+    @Override
+    public List<SysMenuEntity> findALL() {
+        return sysMenuDao.findALL();
+    }
+
+    @Override
+    public int countAll() {
+        return sysMenuDao.countAll();
+    }
+
+    @Override
+    public List<SysMenuEntity> findByParames(Map<String, Object> map) {
+        return sysMenuDao.findByParames(map);
+    }
+
+    @Override
+    public int countByParames(Map<String, Object> map) {
+        return sysMenuDao.countByParames(map);
+    }
+
+    @Override
+    public int insert(SysMenuEntity t) {
+        return sysMenuDao.insert(t);
+    }
+
+    @Override
+    public int update(SysMenuEntity t) {
+        return sysMenuDao.update(t);
+    }
+
+    @Override
+    public int deleteById(long id) {
+        return sysMenuDao.deleteById(id);
+    }
+
+    @Override
+    public int deleteBatch(List<Long> ids) {
+        return sysMenuDao.deleteBatch(ids);
     }
 
     /**

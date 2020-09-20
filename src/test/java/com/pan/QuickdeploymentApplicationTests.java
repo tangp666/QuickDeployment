@@ -1,17 +1,26 @@
 package com.pan;
 
+import com.pan.entity.SysMenuEntity;
+import com.pan.service.SysMenuService;
 import com.pan.util.DownLoadUtils;
 import com.pan.util.MVNUtils;
 import com.pan.util.ZipUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class QuickdeploymentApplicationTests {
 
+    @Autowired
+    private SysMenuService sysMenuService;
+
     @Test
     void contextLoads() {
-        System.out.println("1111111111111111111");
+        List<SysMenuEntity> all = sysMenuService.findALL();
+        System.out.println(all.size());
     }
 
     /**

@@ -70,18 +70,18 @@ public class MenuComtroller extends BaseController{
     /**
      * 跳转添加页面
      * @param model
-     * @param parentId 参数条件 parentId 父节点id
+     * @param id 参数条件 parentId 父节点id
      * @return
      */
-    @RequestMapping(value = "/add/{parentId}", method = RequestMethod.GET)
-    public String menuAdd(Model model, @PathVariable("parentId") long parentId){
+    @RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
+    public String menuAdd(Model model, @PathVariable("id") long id){
         SysMenuEntity sysMenuEntity = new SysMenuEntity();
         //当前添加的菜单级别为最高级别时
-        if(parentId == 0){
-            sysMenuEntity.setParentId(parentId);
+        if(id == 0){
+            sysMenuEntity.setId(id);
             sysMenuEntity.setName("一级菜单");
         }else {
-            sysMenuEntity = sysMenuService.findById(parentId);
+            sysMenuEntity = sysMenuService.findById(id);
         }
         model.addAttribute("sysMenuEntity", sysMenuEntity);
         return "menu/add";

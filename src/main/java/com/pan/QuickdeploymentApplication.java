@@ -4,11 +4,13 @@ import com.pan.util.BeanUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * 启动类
  * @author tangpan
  */
+@MapperScan("com.pan.dao")
 @SpringBootApplication
 public class QuickdeploymentApplication {
 

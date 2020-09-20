@@ -225,14 +225,14 @@ function getMenuTree(url, params, columns, ele) {
 }
 
 //新增
-function add(parentId) {
+function add(id) {
     layer.open({
         type : 2,
         title : '增加',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : '/menu/add/'+parentId // iframe的url
+        content : '/menu/add/'+id // iframe的url
     });
 }
 //修改
