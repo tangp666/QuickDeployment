@@ -1,12 +1,13 @@
 package com.pan.service.impl;
 
 import com.pan.dao.SysMenuDao;
+import com.pan.dao.SysUserDao;
 import com.pan.entity.SysMenuEntity;
 import com.pan.query.SysMenuQuery;
 import com.pan.service.SysMenuService;
 import com.pan.util.MenuTreeUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,9 +21,8 @@ import java.util.stream.Collectors;
 public class SysMenuServiceIpml extends BaseServiceImpl<SysMenuEntity> implements SysMenuService {
 
     private SysMenuDao sysMenuDao;
-
     @Resource
-    public void setUserDao(SysMenuDao sysMenuDao) {
+    public void setSysMenuDao(SysMenuDao sysMenuDao) {
         this.sysMenuDao = sysMenuDao;
         super.setBaseDao(sysMenuDao);
     }

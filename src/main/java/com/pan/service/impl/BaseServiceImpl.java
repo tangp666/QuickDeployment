@@ -3,9 +3,11 @@ package com.pan.service.impl;
 import com.pan.dao.BaseDao;
 import com.pan.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +17,9 @@ import java.util.Map;
  * @author tangpan
  */
 @Service("baseService")
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public class BaseServiceImpl<T> implements BaseService<T> {
 
-    //通过BaseDao来操作数据库
     private BaseDao<T> baseDao;
-
     public void setBaseDao(BaseDao<T> baseDao) {
         this.baseDao = baseDao;
     }

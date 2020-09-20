@@ -1,9 +1,11 @@
 package com.pan.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 import java.util.Map;
 
-public interface BaseDao<T>{
+public interface BaseDao<T> extends Mapper {
 
     /**
      * 根据id查询实体对象

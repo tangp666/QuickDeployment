@@ -13,6 +13,8 @@ import java.util.Date;
 @Table(name = "sys_user")
 public class SysUserEntity extends BaseEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /* 用户名 */
     @Column(name = "username")
     private String username;
