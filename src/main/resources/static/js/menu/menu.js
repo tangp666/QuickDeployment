@@ -25,7 +25,6 @@ function load() {
             field: 'name',
             width: '20%'
         },
-
         {
             title: '图标',
             field: 'icon',
@@ -119,7 +118,6 @@ function getMenuTree(url, params, columns, ele) {
         type: "get",
         data: params,
         success: function (data) {
-            debugger
             var indexNum = 0;
             var arr = getLevelOneNodes(data.rows);
             var tableData={
@@ -138,38 +136,18 @@ function getMenuTree(url, params, columns, ele) {
                 checkboxHeader:false,
                 columns:columns,
                 treeView: true,		// 开启表格树功能
-                treeId: "id",	// 每个节点的独立编号
+                treeId: "menuId",	// 每个节点的独立编号
                 parentId: "parentId",	// 父节点的treeId
                 treeField: "name",	// icon显示在哪一列
-                treeLevelField: "nodeLevel",	// 设置级别对应的字段
-                treeParentLevelField: "nodeLevel",	// 父节点的级别对应的字段
-                // treeMaxLevel: 3,	// 最深级别设定，不设定则视为无穷
                 getChild:function(index, treeId){
-                    var pId=tableData.RetValue[index][treeId];
                     var children=[];
-                    $.each(data,function(i,v){
+                    $.each(data.rows,function(i,v){
                         if(v.parentId == tableData.RetValue[index][treeId]){
-                            var type = "budget";
-                            var nodeLevel = v.nodeLevel;
-                            if(!v.nodeLevel){
-                                var pNode = getNodeById(data, v.parentId);
-                                nodeLevel = pNode.nodeLevel + 1;
-                                var nodeIndex = getNodeIndexById(data, v.id);
-                                data[nodeIndex].nodeLevel = nodeLevel;
-                                type = "dept";
-                            }
-
-                            nodeLevel = nodeLevel -1;
-
                             var name = v.name;
-                            if(!name){
-                                name = v.deptName;
-                            }
                             var nodeType = 2;
                             if(v.nodeType){
                                 nodeType = v.nodeType;
                             }
-
                             if(hasChild(data, v)){
                                 nodeType = 1;
                             }else{
@@ -178,20 +156,13 @@ function getMenuTree(url, params, columns, ele) {
 
                             children.unshift({
                                 name: name,
-                                nodeLevel: nodeLevel,
                                 menuId: v.id,
-                                code: v.code,
-                                delFlag: v.delFlag,
                                 nodeType: nodeType,
                                 url: v.url,
                                 perms: v.perms,
                                 icon: v.icon,
                                 type: v.type,
-                                remainMoney: v.remainMoney,
-                                freezeMoney: v.freezeMoney,
-                                executedMoney: v.executedMoney,
-                                budgeExecutedMoney: v.budgeExecutedMoney,
-                                parentId: v.parentId,
+                                parentId: v.parentId
                             });
                         }
                     });
@@ -221,13 +192,6 @@ function getMenuTree(url, params, columns, ele) {
                 if(datas){
                     for(var i = 0; i < datas.length; i++){
                         if(datas[i].parentId == 0){
-                            var nodeLevel = 0;
-                            if(datas[i].nodeLevel){
-                                nodeLevel = datas[i].nodeLevel;
-                            }else{
-                                datas[i].nodeLevel = nodeLevel;
-                            }
-
                             var nodeType;
                             if(hasChild(datas, datas[i])){
                                 nodeType = 1;
@@ -239,20 +203,13 @@ function getMenuTree(url, params, columns, ele) {
                             res.push({
                                 indexNum: indexNum,
                                 name: datas[i].name,
-                                nodeLevel: nodeLevel,
                                 nodeType: nodeType,
-                                menuId: datas[i].menuId,
-                                delFlag: datas[i].delFlag,
-                                code: datas[i].code,
+                                menuId: datas[i].id,
                                 parentId: datas[i].parentId,
                                 url: datas[i].url,
                                 perms: datas[i].perms,
                                 icon: datas[i].icon,
                                 type: datas[i].type,
-                                remainMoney: datas[i].remainMoney,
-                                freezeMoney: datas[i].freezeMoney,
-                                executedMoney: datas[i].executedMoney,
-                                budgeExecutedMoney: datas[i].budgeExecutedMoney,
                             });
                         }
                     }
@@ -260,11 +217,11 @@ function getMenuTree(url, params, columns, ele) {
                 return res;
             }
 
-            function getNodeById(datas, menuId) {
+            function getNodeById(datas, id) {
                 var res = {};
                 if(datas){
                     for(var i = 0; i < datas.length; i++){
-                        if(menuId == datas[i].menuId){
+                        if(id == datas[i].id){
                             res = datas[i];
                             break;
                         }
@@ -273,11 +230,11 @@ function getMenuTree(url, params, columns, ele) {
                 return res;
             }
 
-            function getNodeIndexById(datas, menuId) {
+            function getNodeIndexById(datas, id) {
                 var res = 0;
                 if(datas){
                     for(var i = 0; i < datas.length; i++){
-                        if(menuId == datas[i].menuId){
+                        if(id == datas[i].id){
                             res = i;
                             break;
                         }
