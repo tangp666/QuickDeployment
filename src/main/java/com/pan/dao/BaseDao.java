@@ -64,6 +64,6 @@ public interface BaseDao<T>{
      * @param ids 主键id集合
      * @return
      */
-    int deleteBatch(long[] ids);
+    int deleteBatch(List<Long> ids);
 
 }

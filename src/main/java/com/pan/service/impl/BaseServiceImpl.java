@@ -65,7 +65,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public int deleteBatch(long[] ids) {
+    public int deleteBatch(List<Long> ids) {
         return baseDao.deleteBatch(ids);
     }
 }

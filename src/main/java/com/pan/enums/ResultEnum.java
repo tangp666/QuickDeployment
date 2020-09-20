@@ -7,7 +7,11 @@ package com.pan.enums;
 public enum ResultEnum {
 
     SUCCESS(0, "成功"),
-    EXCEPTION(404,"异常")
+    EXCEPTION(404,"异常"),
+    SAVESUCCESS(1, "保存成功"),
+    SAVEERROR(2, "保存失败"),
+    DELETESUCCESS(3, "删除成功"),
+    DELETEERROR(4, "删除失败")
     ;
 
     private int code;

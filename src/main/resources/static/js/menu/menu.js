@@ -73,29 +73,24 @@ function load() {
             align: 'center',
             valign: 'center',
             formatter: function (value, item, index) {
-                var e = '<a class="btn btn-primary btn-sm '
-                    + s_edit_h
-                    + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                    + item.id
-                    + '\')">编辑</a> ';
-                var p = '<a class="btn btn-primary btn-sm '
-                    + s_add_h
-                    + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
-                    + item.id
-                    + '\')">添加下级</a> ';
-                var d = '<a class="btn btn-warning btn-sm '
-                    + s_remove_h
-                    + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                    + item.id
-                    + '\')">删除</a> ';
+                var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                    + item.menuId + '\')">编辑</a> ';
+                var p = '<a class="btn btn-primary btn-sm '+ s_add_h + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
+                    + item.menuId + '\')">添加下级</a> ';
+                var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                    + item.menuId + '\')">删除</a> ';
                 return e + d + p;
             }
         }];
-    getMenuTree('menu/menuList', {
+    getMenuTree('/menu/menuList', {
         sort:'order_num'
     }, columns);
 }
 
+// 刷新
+function reLoad() {
+    load();
+}
 
 function getMenuTree(url, params, columns, ele) {
     if(!ele){
@@ -118,8 +113,13 @@ function getMenuTree(url, params, columns, ele) {
         type: "get",
         data: params,
         success: function (data) {
+            //查询结果不正确时
+            if(data.code != 0){
+                layer.error(data.message);
+                return;
+            }
             var indexNum = 0;
-            var arr = getLevelOneNodes(data.rows);
+            var arr = getLevelOneNodes(data.data.rows);
             var tableData={
                 RetValue:arr,
                 Tag:1
@@ -141,14 +141,14 @@ function getMenuTree(url, params, columns, ele) {
                 treeField: "name",	// icon显示在哪一列
                 getChild:function(index, treeId){
                     var children=[];
-                    $.each(data.rows,function(i,v){
+                    $.each(data.data.rows,function(i,v){
                         if(v.parentId == tableData.RetValue[index][treeId]){
                             var name = v.name;
                             var nodeType = 2;
                             if(v.nodeType){
                                 nodeType = v.nodeType;
                             }
-                            if(hasChild(data, v)){
+                            if(hasChild(data.data.rows, v)){
                                 nodeType = 1;
                             }else{
                                 nodeType = 2;
@@ -216,32 +216,6 @@ function getMenuTree(url, params, columns, ele) {
                 }
                 return res;
             }
-
-            function getNodeById(datas, id) {
-                var res = {};
-                if(datas){
-                    for(var i = 0; i < datas.length; i++){
-                        if(id == datas[i].id){
-                            res = datas[i];
-                            break;
-                        }
-                    }
-                }
-                return res;
-            }
-
-            function getNodeIndexById(datas, id) {
-                var res = 0;
-                if(datas){
-                    for(var i = 0; i < datas.length; i++){
-                        if(id == datas[i].id){
-                            res = i;
-                            break;
-                        }
-                    }
-                }
-                return res;
-            }
             $('#exampleTable th div').each(function () {
                 $(this).attr("title", $(this).text());
                 $(this).css("cursor", 'pointer');
@@ -250,20 +224,15 @@ function getMenuTree(url, params, columns, ele) {
     });
 }
 
-//刷新
-function reLoad() {
-    $('#exampleTable').bootstrapTable('refresh');
-}
-
 //新增
-function add() {
+function add(parentId) {
     layer.open({
         type : 2,
         title : '增加',
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : prefix + '/add' // iframe的url
+        content : '/menu/add/'+parentId // iframe的url
     });
 }
 //修改
@@ -274,7 +243,7 @@ function edit(id) {
         maxmin : true,
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '520px' ],
-        content : prefix + '/edit/' + id // iframe的url
+        content : '/menu/edit/' + id // iframe的url
     });
 }
 //删除
@@ -283,17 +252,17 @@ function remove(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : prefix+"/remove",
+            url : "/menu/delete",
             type : "post",
             data : {
                 'id' : id
             },
             success : function(r) {
-                if (r.code==0) {
-                    layer.msg(r.msg);
+                if (r.code==3) {
+                    layer.msg(r.message);
                     reLoad();
                 }else{
-                    layer.msg(r.msg);
+                    layer.msg(r.message);
                 }
             }
         });
@@ -314,37 +283,25 @@ function batchRemove() {
         var ids = new Array();
         // 遍历所有选择的行数据，取每条数据对应的ID
         $.each(rows, function(i, row) {
-            ids[i] = row['id'];
+            ids.push(row['id'])
         });
         $.ajax({
             type : 'POST',
             data : {
                 "ids" : ids
             },
-            url : prefix + '/batchRemove',
+            url : 'menu/batchDelete',
             success : function(r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
+                if (r.code == 3) {
+                    layer.msg(r.message);
                     reLoad();
                 } else {
-                    layer.msg(r.msg);
+                    layer.msg(r.message);
                 }
             }
         });
     }, function() {
 
-    });
-}
-
-//查看
-function view(id) {
-    layer.open({
-        type: 2,
-        title: '查看',
-        maxmin: true,
-        shadeClose: false, // 点击遮罩关闭层
-        area: [ '800px', '520px' ],
-        content: prefix + '/view/' + id // iframe的url
     });
 }
 

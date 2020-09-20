@@ -77,4 +77,13 @@ public class LoginController extends BaseController{
         return "index" ;
     }
 
+    /**
+     * 系统图标
+     * @return
+     */
+    @RequestMapping("fontIcoList")
+    public String fontIcoList(){
+        return "fontIcoList";
+    }
+
 }
