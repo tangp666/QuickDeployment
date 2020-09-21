@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.SysRoleDao">
+
+    <!-- 根据id查询角色信息 -->
+    <select id="findById" resultType="com.pan.entity.SysRoleEntity" parameterType="java.lang.Long">
+        select * from sys_role where id = ${id};
+    </select>
+    <!-- 查询所有的角色信息 -->
+    <select id="findALL" resultType="com.pan.entity.SysRoleEntity">
+        select * from sys_role
+    </select>
+    <!-- 查询所有的角色信息数量 -->
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from sys_role
+    </select>
+
+    <!-- 通过菜单条件查询角色信息集合 -->
+    <select id="findByParames" resultType="com.pan.entity.SysRoleEntity" parameterType="java.util.Map">
+        select * from sys_role
+        where 1 = 1
+        <if test="roleName != null and roleName != ''">
+            and role_name = #{parentId}
+        </if>
+        <if test="sort != null and sort != ''">
+            ORDER by ${sort}
+        </if>
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        <if test="limit != null and offset != null">
+            LIMIT #{offset} , #{limit}
+        </if>
+    </select>
+
+    <!-- 通过菜单条件查询角色信息数量 -->
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from sys_role
+        where 1 = 1
+        <if test="roleName != null and roleName != ''">
+            and role_name = #{parentId}
+        </if>
+    </select>
+
+    <!-- 插入信息 -->
+    <insert id="insert" parameterType="com.pan.entity.SysRoleEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role(role_name, remark, create_user_id, create_time) values (#{roleName}, #{remark}, #{createUserId}, #{createTime});
+    </insert>
+    <!-- 修改信息 -->
+    <update id="update" parameterType="com.pan.entity.SysRoleEntity">
+        update sys_role
+        <set>
+            <if test="roleName != null">role_name = #{roleName},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_role where id = #{id};
+    </delete>
+    <!-- 批量删除 -->
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from sys_role where 1 = 1
+        <if test="ids != null and ids.size() > 0">
+            and id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </delete>
+</mapper>

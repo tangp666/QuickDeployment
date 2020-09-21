@@ -31,7 +31,7 @@
         <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
     </select>
     <!-- 插入数据 -->
-    <insert id="insert" parameterType="com.pan.entity.SysUserEntity">
+    <insert id="insert" parameterType="com.pan.entity.SysUserEntity" useGeneratedKeys="true" keyProperty="id">
         insert into sys_user(username, password, salt, status, create_user_id, create_time) values(#{username},#{password},#{salt},#{status},#{createUserId},#{createTime})
     </insert>
     <!-- 修改 -->

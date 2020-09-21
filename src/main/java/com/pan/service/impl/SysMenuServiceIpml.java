@@ -1,13 +1,15 @@
 package com.pan.service.impl;
 
 import com.pan.dao.SysMenuDao;
-import com.pan.dao.SysUserDao;
+import com.pan.dao.SysRoleMenuDao;
 import com.pan.entity.SysMenuEntity;
+import com.pan.entity.SysRoleMenuEntity;
 import com.pan.query.SysMenuQuery;
+import com.pan.query.Tree;
 import com.pan.service.SysMenuService;
+import com.pan.util.BuildTreeUtils;
 import com.pan.util.MenuTreeUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,11 +19,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 菜单
+ * @author tangpan
+ */
 @Service("sysMenuService")
 public class SysMenuServiceIpml implements SysMenuService {
 
     @Resource
     private SysMenuDao sysMenuDao;
+
+    @Resource
+    private SysRoleMenuDao sysRoleMenuDao;
 
     @Override
     public SysMenuEntity findById(long id) {
@@ -106,5 +115,58 @@ public class SysMenuServiceIpml implements SysMenuService {
             menuList = menuTree.builTree();
         }
         return menuList;
+    }
+
+    @Override
+    public Tree<SysMenuEntity> getTree() {
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("sort", "order_num");
+        map.put("order", "asc");
+        List<SysMenuEntity> menus = sysMenuDao.findByParames(map);
+        //判断树节点是否为空
+        List<Tree<SysMenuEntity>> trees = new ArrayList<>();
+        if(menus != null && menus.size() > 0){
+            menus.stream().forEach(sysMenuEntity -> {
+                Tree<SysMenuEntity> tree = new Tree<SysMenuEntity>();
+                tree.setId(sysMenuEntity.getId().toString());
+                tree.setParentId(sysMenuEntity.getParentId().toString());
+                tree.setText(sysMenuEntity.getName());
+                trees.add(tree);
+            });
+        }
+        Tree<SysMenuEntity> build = BuildTreeUtils.build(trees);
+        return build;
+    }
+
+    @Override
+    public Tree<SysMenuEntity> getTree(long roleId) {
+        // 根据roleId查询权限
+        Map menuMap = new HashMap<String, Object>(16);
+        menuMap.put("sort", "order_num");
+        menuMap.put("order", "asc");
+        //查询所有的菜单
+        List<SysMenuEntity> menus = sysMenuDao.findByParames(menuMap);
+        //选中的菜单
+        Map roleMenuMap = new HashMap<String, Object>(16);
+        roleMenuMap.put("roleId", roleId);
+        List<Long> sysRoleMenuIds = sysRoleMenuDao.findMenusByParames(roleMenuMap);
+
+        List<Tree<SysMenuEntity>> trees = new ArrayList<>();
+        for (SysMenuEntity entity : menus) {
+            Tree<SysMenuEntity> tree = new Tree<SysMenuEntity>();
+            tree.setId(entity.getId().toString());
+            tree.setParentId(entity.getParentId().toString());
+            tree.setText(entity.getName());
+            Map<String, Object> state = new HashMap<>(16);
+            if (sysRoleMenuIds.contains(entity.getId())) {
+                state.put("selected", true);
+            } else {
+                state.put("selected", false);
+            }
+            tree.setState(state);
+            trees.add(tree);
+        }
+        Tree<SysMenuEntity> build = BuildTreeUtils.build(trees);
+        return build;
     }
 }

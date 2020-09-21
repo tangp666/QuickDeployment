@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.SysRoleMenuDao">
+
+    <!-- 根据id查询角色菜单信息 -->
+    <select id="findById" resultType="com.pan.entity.SysRoleMenuEntity" parameterType="java.lang.Long">
+        select * from sys_role_menu where id = ${id};
+    </select>
+    <!-- 查询所有的角色信息 -->
+    <select id="findALL" resultType="com.pan.entity.SysRoleMenuEntity">
+        select * from sys_role_menu
+    </select>
+    <!-- 查询所有的角色信息数量 -->
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from sys_role_menu
+    </select>
+
+    <!-- 通过菜单条件查询角色信息集合 -->
+    <select id="findByParames" resultType="com.pan.entity.SysRoleMenuEntity" parameterType="java.util.Map">
+        select * from sys_role_menu where 1 = 1
+        <if test="roleId != null and roleId != ''">
+            and role_id = #{roleId}
+        </if>
+        <if test="menuId != null and menuId != ''">
+            and menu_id = #{menuId}
+        </if>
+        <if test="sort != null and sort != ''">
+            ORDER by ${sort}
+        </if>
+        <if test="order != null and order != ''">
+            ${order}
+        </if>
+        <if test="limit != null and offset != null">
+            LIMIT #{offset} , #{limit}
+        </if>
+    </select>
+
+    <!-- 通过菜单条件查询角色信息数量 -->
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from sys_role where 1 = 1
+        <if test="roleId != null and roleId != ''">
+            and role_id = #{roleId}
+        </if>
+        <if test="menuId != null and menuId != ''">
+            and menu_id = #{menuId}
+        </if>
+    </select>
+
+    <!-- 插入信息 -->
+    <insert id="insert" parameterType="com.pan.entity.SysRoleMenuEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role_menu(role_id, menu_id) values (#{roleId}, #{menuId});
+    </insert>
+    <!-- 修改信息 -->
+    <update id="update" parameterType="com.pan.entity.SysRoleMenuEntity">
+        update sys_role_menu
+        <set>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="menuId != null">menu_id = #{menuId}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_role_menu where id = #{id};
+    </delete>
+    <!-- 批量删除 -->
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from sys_role_menu where 1 = 1
+        <if test="ids != null and ids.size() > 0">
+            and id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </delete>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into sys_role_menu(role_id, menu_id)
+        values
+        <foreach collection="entities" item="role" separator=",">
+            (#{role.roleId}, #{role.menuId})
+        </foreach>
+    </insert>
+
+    <!-- 通过菜单条件查询角色id集合 -->
+    <select id="findMenusByParames" resultType="java.lang.Long" parameterType="java.util.Map">
+        select menu_id from sys_role_menu where 1 = 1
+        <if test="roleId != null and roleId != ''">
+            and role_id = #{roleId}
+        </if>
+        <if test="menuId != null and menuId != ''">
+            and menu_id = #{menuId}
+        </if>
+    </select>
+
+    <!-- 带条件删除删除 -->
+    <delete id="deleteByParames" parameterType="java.util.Map">
+        delete from sys_role_menu
+        <where>
+            1 = 1
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+        </where>
+    </delete>
+
+</mapper>

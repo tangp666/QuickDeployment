@@ -5,6 +5,7 @@ import com.pan.entity.ResultEntity;
 import com.pan.entity.SysMenuEntity;
 import com.pan.enums.ResultEnum;
 import com.pan.query.SysMenuQuery;
+import com.pan.query.Tree;
 import com.pan.service.SysMenuService;
 import com.pan.util.MacroelementUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -179,6 +180,57 @@ public class MenuComtroller extends BaseController{
         }else{
             return new ResultEntity(ResultEnum.DELETEERROR.getCode(), ResultEnum.DELETEERROR.getMessage());
         }
+    }
+
+    /**
+     * 获取菜单树
+     * @return
+     */
+    @RequestMapping("/menuTree")
+    @ResponseBody
+    public ResultEntity getTree(){
+        ResultEntity resultEntity = new ResultEntity();
+        try {
+            //拼接树
+            Tree<SysMenuEntity> tree = sysMenuService.getTree();
+            //拼装结果
+            JSONObject object = new JSONObject();
+            object.put("data", tree);
+            resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+            resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+            resultEntity.setData(object);
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
+    }
+
+    /**
+     * 获取菜单树
+     * @param id roleid 查询选中
+     * @return
+     */
+    @RequestMapping("/menuTree/{id}")
+    @ResponseBody
+    public ResultEntity getTree(@PathVariable("id") long id){
+        ResultEntity resultEntity = new ResultEntity();
+        try {
+            //拼接树
+            Tree<SysMenuEntity> tree = sysMenuService.getTree(id);
+            //拼装结果
+            JSONObject object = new JSONObject();
+            object.put("data", tree);
+            resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+            resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+            resultEntity.setData(object);
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
     }
 
 }

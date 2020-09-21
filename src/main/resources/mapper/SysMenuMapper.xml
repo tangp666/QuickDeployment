@@ -19,6 +19,12 @@
     <select id="findByParames" resultType="com.pan.entity.SysMenuEntity" parameterType="java.util.Map">
         select * from sys_menu
         where 1 = 1
+        <if test="ids != null and ids.size() > 0">
+            and id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
         <if test="parentId != null and parentId != ''">
             and parent_id = #{parentId}
         </if>
@@ -61,7 +67,7 @@
     </select>
 
     <!-- 插入信息 -->
-    <insert id="insert" parameterType="com.pan.entity.SysMenuEntity">
+    <insert id="insert" parameterType="com.pan.entity.SysMenuEntity" useGeneratedKeys="true" keyProperty="id">
         insert into sys_menu(parent_id, name, url, perms, type, icon, order_num) values (#{parentId}, #{name}, #{url}, #{perms}, #{type}, #{icon}, #{orderNum});
     </insert>
     <!-- 修改信息 -->
