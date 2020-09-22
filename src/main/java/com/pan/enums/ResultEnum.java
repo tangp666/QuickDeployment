@@ -11,7 +11,8 @@ public enum ResultEnum {
     SAVESUCCESS(1, "保存成功"),
     SAVEERROR(2, "保存失败"),
     DELETESUCCESS(3, "删除成功"),
-    DELETEERROR(4, "删除失败")
+    DELETEERROR(4, "删除失败"),
+    FAIL(10, "错误")
     ;
 
     private int code;

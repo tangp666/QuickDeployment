@@ -15,18 +15,30 @@
     </select>
     <!-- 根加条件查询用户信息 -->
     <select id="findByParames" resultType="com.pan.entity.SysUserEntity" parameterType="java.util.Map">
-        select * from sys_user
-        where  1 = 1
-        <if test="username != null and username != ''">and username like comcat('%', #{username}, '%')</if>
-        <if test="status != null and status != ''">and status = #{status}</if>
-        <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
-        <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+        <choose>
+            <when test="roleId != null and roleId != ''">
+                select su.* from sys_user su LEFT JOIN sys_user_role sur ON su.id = sur.user_id
+                where  1 = 1 and sur.role_id = #{roleId}
+                <if test="username != null and username != ''">and su.username like CONCAT('%', #{username}, '%')</if>
+                <if test="status != null and status != ''">and su.status = #{status}</if>
+                <if test="startTime != null and endTime != null">and su.create_time between #{startTime} and #{endTime}</if>
+                <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+            </when>
+            <otherwise>
+                select * from sys_user
+                where  1 = 1
+                <if test="username != null and username != ''">and username like CONCAT('%', #{username}, '%')</if>
+                <if test="status != null and status != ''">and status = #{status}</if>
+                <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
+                <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+            </otherwise>
+        </choose>
     </select>
     <!-- 根加条件查询用户信息 -->
-    <select id="countByParames" resultType="com.pan.entity.SysUserEntity" parameterType="java.util.Map">
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from sys_user
         where  1 = 1
-        <if test="username != null and username != ''">and username like comcat('%', #{username}, '%')</if>
+        <if test="username != null and username != ''">and username like CONCAT('%', #{username}, '%')</if>
         <if test="status != null and status != ''">and status = #{status}</if>
         <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
     </select>

@@ -63,4 +63,9 @@ public class SysRoleServiceImpl implements SysRoleService {
     public int deleteBatch(List<Long> ids) {
         return sysRoleDao.deleteBatch(ids);
     }
+
+    @Override
+    public int checkAdmin(Map<String, Object> map) {
+        return sysRoleDao.checkAdmin(map);
+    }
 }

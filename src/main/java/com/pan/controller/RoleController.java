@@ -223,4 +223,33 @@ public class RoleController extends BaseController {
         return resultEntity;
     }
 
+    /**
+     * 判断是否是管理员
+     * @param id 用户id
+     * @return
+     */
+    @RequestMapping("/checkRoles/{id}")
+    @ResponseBody
+    public ResultEntity checkAdmin(@PathVariable("id") long id){
+        ResultEntity resultEntity = new ResultEntity();
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId", id);
+        try {
+            //判断是否是管理员 0 不是  1 是
+            int i = sysRoleService.checkAdmin(map);
+            if(i > 0){
+                resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+                resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+            }else {
+                resultEntity.setCode(ResultEnum.FAIL.getCode());
+                resultEntity.setMessage(ResultEnum.FAIL.getMessage());
+            }
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
+    }
+
 }

@@ -1,21 +1,14 @@
 package com.pan.controller;
 
-import com.pan.dao.SysMenuDao;
 import com.pan.entity.ResultEntity;
 import com.pan.enums.ResultEnum;
 import com.pan.util.ShiroUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * 用户登录

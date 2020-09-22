@@ -87,7 +87,7 @@ public class UserRealm extends AuthorizingRealm {
         if(user.getStatus() == 0){
             throw new LockedAccountException("账号已被锁定,请联系管理员");
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), com.pan.util.StringUtils.isNotEmpty(user.getSalt()) ? ByteSource.Util.bytes(user.getSalt()) : ByteSource.Util.bytes(""), getName());
         return info;
     }
 

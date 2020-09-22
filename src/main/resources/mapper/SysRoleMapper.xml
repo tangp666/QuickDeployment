@@ -8,7 +8,7 @@
     </select>
     <!-- 查询所有的角色信息 -->
     <select id="findALL" resultType="com.pan.entity.SysRoleEntity">
-        select * from sys_role
+        select * from sys_role order by id
     </select>
     <!-- 查询所有的角色信息数量 -->
     <select id="countAll" resultType="java.lang.Integer">
@@ -69,4 +69,13 @@
             </foreach>
         </if>
     </delete>
+
+    <!-- 判断是否是管理员 -->
+    <select id="checkAdmin" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from sys_role sr LEFT JOIN sys_user_role sur ON sr.id = sur.role_id
+        where 1 = 1
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId}
+        </if>
+    </select>
 </mapper>
