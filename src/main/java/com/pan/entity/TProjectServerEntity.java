@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author tangpan
  */
 @Table(name = "t_project_server")
-public class TprojectServerEntity extends BaseEntity implements Serializable {
+public class TProjectServerEntity extends BaseEntity implements Serializable {
 
     private static final long serializable = 1l;
 

@@ -15,7 +15,7 @@
         select count(1) from t_project_info
     </select>
 
-    <!-- 通过菜单条件查询菜单信息集合 -->
+    <!-- 通过菜单条件查询服务器信息集合 -->
     <select id="findByParames" resultType="com.pan.entity.TProjectInfoEntity" parameterType="java.util.Map">
         select * from t_project_info
         where 1 = 1
@@ -33,7 +33,7 @@
         </if>
     </select>
 
-    <!-- 通过菜单条件查询菜单信息数量 -->
+    <!-- 通过菜单条件查询服务器信息数量 -->
     <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_project_info
         where 1 = 1
