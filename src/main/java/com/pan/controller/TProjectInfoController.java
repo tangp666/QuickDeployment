@@ -5,6 +5,7 @@ import com.pan.entity.ResultEntity;
 import com.pan.entity.TProjectInfoEntity;
 import com.pan.enums.ResultEnum;
 import com.pan.service.TProjectInfoService;
+import com.pan.util.ShiroUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +120,8 @@ public class TProjectInfoController extends BaseController {
         ResultEntity resultEntity = new ResultEntity();
         try {
             //保存
+            tProjectInfoEntity.setCreateTime(new Date());
+            tProjectInfoEntity.setCreateUserId(ShiroUtils.getUserId());
             int insert = tProjectInfoService.insert(tProjectInfoEntity);
             resultEntity.setCode(ResultEnum.SAVESUCCESS.getCode());
             resultEntity.setMessage(ResultEnum.SAVESUCCESS.getMessage());

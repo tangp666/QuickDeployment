@@ -2,6 +2,7 @@ package com.pan.service.impl;
 
 import com.pan.dao.TProjectServerDao;
 import com.pan.entity.TProjectServerEntity;
+import com.pan.entity.TServerInfoEntity;
 import com.pan.service.TProjectServerService;
 import org.springframework.stereotype.Service;
 
@@ -67,5 +68,10 @@ public class TProjectServerServiceImpl implements TProjectServerService {
     @Override
     public int deleteByParame(Map<String, Object> map) {
         return tProjectServerDao.deleteByParame(map);
+    }
+
+    @Override
+    public List<TServerInfoEntity> findTServerInfoLists(Map<String, Object> map) {
+        return tProjectServerDao.findTServerInfoLists(map);
     }
 }

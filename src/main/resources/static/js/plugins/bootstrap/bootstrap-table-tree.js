@@ -1966,12 +1966,12 @@
                         //添加项目管理
                         if(that.options.url == '/project/projectList'){
                             $.ajax({
-                                url: "/server/serverList",
+                                url: "/tProjectServer/serverList",
                                 type: "get",
                                 cache: true,
                                 async: true,
                                 data: {
-                                    'id': row.id
+                                    'projectId': row.id
                                 },
                                 success: function (r) {
                                     var exampleTableId = "exampleTable" + row.id;

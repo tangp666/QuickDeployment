@@ -77,7 +77,18 @@
             <if test="projectId != null and projectId != ''"> and project_id = #{projectId}</if>
             <if test="serverId != null and serverId != ''"> and server_id = #{serverId}</if>
         </where>
-
     </delete>
 
+    <!-- 通过菜单条件查询服务器信息 -->
+    <select id="findTServerInfoLists" resultType="com.pan.entity.TServerInfoEntity" parameterType="java.util.Map">
+        select tsi.* from
+          t_server_info tsi LEFT JOIN t_project_server tps ON tsi.id = tps.server_id
+        where 1 = 1
+        <if test="projectId != null and projectId != ''">
+            and tps.project_id = #{projectId}
+        </if>
+        <if test="serverId != null and serverId != ''">
+            and tps.server_id = #{serverId}
+        </if>
+    </select>
 </mapper>
