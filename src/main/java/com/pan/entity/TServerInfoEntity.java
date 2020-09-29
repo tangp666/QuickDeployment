@@ -33,11 +33,11 @@ public class TServerInfoEntity extends BaseEntity implements Serializable {
     @Column(name = "server_password")
     private String serverPassword;
     /* 创建人 */
-    @Column(name = "server_password")
-    private long create_user_id;
+    @Column(name = "create_user_id")
+    private long createUserId;
     /* 创建时间 */
-    @Column(name = "server_password")
-    private Date create_time;
+    @Column(name = "create_time")
+    private Date createTime;
 
     public String getServerName() {
         return serverName;
@@ -87,19 +87,19 @@ public class TServerInfoEntity extends BaseEntity implements Serializable {
         this.serverPassword = serverPassword;
     }
 
-    public long getCreate_user_id() {
-        return create_user_id;
+    public long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreate_user_id(long create_user_id) {
-        this.create_user_id = create_user_id;
+    public void setCreateUserId(long createUserId) {
+        this.createUserId = createUserId;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

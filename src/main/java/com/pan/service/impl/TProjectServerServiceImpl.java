@@ -63,4 +63,9 @@ public class TProjectServerServiceImpl implements TProjectServerService {
     public int deleteBatch(List<Long> ids) {
         return tProjectServerDao.deleteBatch(ids);
     }
+
+    @Override
+    public int deleteByParame(Map<String, Object> map) {
+        return tProjectServerDao.deleteByParame(map);
+    }
 }

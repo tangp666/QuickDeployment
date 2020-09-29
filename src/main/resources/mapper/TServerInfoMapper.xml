@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.TServerInfoDao">
+
+    <!-- 根据id查询服务器信息 -->
+    <select id="findById" resultType="com.pan.entity.TServerInfoEntity" parameterType="java.lang.Long">
+        select * from t_server_info where id = ${id};
+    </select>
+    <!-- 查询所有的服务器信息 -->
+    <select id="findALL" resultType="com.pan.entity.TServerInfoEntity">
+        select * from t_server_info
+    </select>
+    <!-- 查询所有的服务器信息和项目关联数量 -->
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from t_server_info
+    </select>
+
+    <!-- 通过菜单条件查询服务器集合 -->
+    <select id="findByParames" resultType="com.pan.entity.TServerInfoEntity" parameterType="java.util.Map">
+        select * from t_server_info
+        where 1 = 1
+        <if test="serverName != null and serverName != ''">
+            and server_name like CONCAT('%', #{serverName}, '%')
+        </if>
+        <if test="serverAddress != null and serverAddress != ''">
+            and server_address like CONCAT('%', #{serverAddress}, '%')
+        </if>
+        <if test="limit != null and offset != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <!-- 通过菜单条件查询服务器数量 -->
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from t_server_info
+        where 1 = 1
+        <if test="serverName != null and serverName != ''">
+            and server_name like CONCAT('%', #{serverName}, '%')
+        </if>
+        <if test="serverAddress != null and serverAddress != ''">
+            and server_address like CONCAT('%', #{serverAddress}, '%')
+        </if>
+    </select>
+
+    <!-- 插入信息 -->
+    <insert id="insert" parameterType="com.pan.entity.TServerInfoEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into t_server_info(server_name, server_desc, server_address, server_prot, server_account, server_password, create_user_id, create_time)
+        values(#{serverName}, #{serverDesc}, #{serverAddress}, #{serverProt}, #{serverAccount}, #{serverPassword}, #{createUserId}, #{createTime});
+    </insert>
+    <!-- 修改信息 -->
+    <update id="update" parameterType="com.pan.entity.TServerInfoEntity">
+        update t_server_info
+        <set>
+            <if test="serverName != null">server_name = #{serverName},</if>
+            <if test="serverDesc != null">server_desc = #{serverDesc},</if>
+            <if test="serverAddress != null">server_address = #{serverAddress},</if>
+            <if test="serverProt != null">server_prot = #{serverProt},</if>
+            <if test="serverAccount != null">server_account = #{serverAccount},</if>
+            <if test="serverPassword != null">server_password = #{serverPassword},</if>
+            <if test="createUserId != null">create_user_id = #{createUserId},</if>
+            <if test="createTime != null">create_time = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from t_server_info where id = #{id};
+    </delete>
+    <!-- 批量删除 -->
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from t_server_info where 1 = 1
+        <if test="ids != null and ids.size() > 0">
+            and id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </delete>
+</mapper>

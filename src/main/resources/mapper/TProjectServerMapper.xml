@@ -69,4 +69,15 @@
             </foreach>
         </if>
     </delete>
+    <!-- 删除 -->
+    <delete id="deleteByParame" parameterType="java.lang.Long">
+        delete from t_project_server
+        <where>
+            1 = 1
+            <if test="projectId != null and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="serverId != null and serverId != ''"> and server_id = #{serverId}</if>
+        </where>
+
+    </delete>
+
 </mapper>
