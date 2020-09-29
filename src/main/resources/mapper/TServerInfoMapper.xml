@@ -25,9 +25,9 @@
         <if test="serverAddress != null and serverAddress != ''">
             and server_address like CONCAT('%', #{serverAddress}, '%')
         </if>
-        <if test="limit != null and offset != null">
-            LIMIT #{offset}, #{limit}
-        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset}, #{limit}-->
+        <!--</if>-->
     </select>
 
     <!-- 通过菜单条件查询服务器数量 -->

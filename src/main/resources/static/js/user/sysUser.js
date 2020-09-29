@@ -38,6 +38,19 @@ function load() {
                         roleId: $('#searchRoleId option select').val()
                     };
                 },
+                responseHandler: function (res) {
+                    if(res.code == 0){
+                        return {
+                            data: res.data.data,
+                            total: res.data.total
+                        }
+                    }else {
+                        return {
+                            data: [],
+                            total: 0
+                        }
+                    }
+                },
                 // "server"
                 // queryParams : queryParams,
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

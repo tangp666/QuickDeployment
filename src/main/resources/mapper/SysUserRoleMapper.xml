@@ -19,7 +19,7 @@
         where  1 = 1
         <if test="userId != null and userId != ''">and user_id = #{userId}</if>
         <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
-        <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+        <!--<if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>-->
     </select>
     <!-- 根加条件查询用户信息 -->
     <select id="countByParames" resultType="com.pan.entity.SysUserRoleEntity" parameterType="java.util.Map">

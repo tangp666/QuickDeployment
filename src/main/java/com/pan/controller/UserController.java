@@ -68,24 +68,34 @@ public class UserController {
      */
     @RequestMapping("/userList")
     @ResponseBody
-    public JSONObject userList(HttpServletRequest request, SysUserEntity entity){
-        //拼接参数
-        Map<String,Object> map = new HashMap<>();
-        map.put("username", entity.getUsername());
-        map.put("roleId", request.getParameter("roleId"));
+    public ResultEntity userList(HttpServletRequest request, SysUserEntity entity){
+        //返回参数
+        ResultEntity resultEntity = new ResultEntity();
+        try {
+            //拼接参数
+            Map<String,Object> map = new HashMap<>();
+            map.put("username", entity.getUsername());
+            map.put("roleId", request.getParameter("roleId"));
 
-        map.put("limit", entity.getLimit());
-        map.put("offset", entity.getOffset());
-        //列表
-        List<SysUserEntity> entities = sysUserService.findByParames(map);
-        //总数
-        int total = sysUserService.countByParames(map);
-
-        //封装数据
-        JSONObject object = new JSONObject();
-        object.put("data", entities);
-        object.put("total", total);
-        return object;
+            map.put("limit", entity.getLimit());
+            map.put("offset", entity.getOffset());
+            //列表
+            List<SysUserEntity> entities = sysUserService.findByParames(map);
+            //总数
+            int total = sysUserService.countByParames(map);
+            //封装数据
+            JSONObject object = new JSONObject();
+            object.put("data", entities);
+            object.put("total", total);
+            resultEntity.setData(object);
+            resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+            resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
     }
 
     /**

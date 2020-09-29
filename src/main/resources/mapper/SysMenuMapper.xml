@@ -40,9 +40,9 @@
                 #{type}
             </foreach>
         </if>
-        <if test="limit != null and offset != null">
-            LIMIT #{offset} , #{limit}
-        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset} , #{limit}-->
+        <!--</if>-->
     </select>
 
     <!-- 通过菜单条件查询菜单信息数量 -->

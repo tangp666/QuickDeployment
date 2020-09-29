@@ -30,9 +30,9 @@
         <if test="order != null and order != ''">
             ${order}
         </if>
-        <if test="limit != null and offset != null">
-            LIMIT #{offset} , #{limit}
-        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset} , #{limit}-->
+        <!--</if>-->
     </select>
 
     <!-- 通过菜单条件查询角色信息数量 -->

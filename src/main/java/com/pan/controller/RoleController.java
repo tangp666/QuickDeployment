@@ -59,24 +59,35 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/roleList")
     @ResponseBody
-    public JSONObject roleList(HttpServletRequest request, HttpServletResponse response, SysRoleQuery query){
-        //拼接参数
-        Map<String,Object> map = new HashMap<>();
-        map.put("roleName",query.getRoleName());
+    public ResultEntity roleList(HttpServletRequest request, HttpServletResponse response, SysRoleQuery query){
+        //返回对象
+        ResultEntity resultEntity = new ResultEntity();
+        try {
+            //拼接参数
+            Map<String,Object> map = new HashMap<>();
+            map.put("roleName",query.getRoleName());
 
-        map.put("limit",query.getLimit());
-        map.put("offset",query.getOffset());
-        map.put("sort", query.getSort());
-        map.put("order", query.getOrder());
-        //数据集合
-        List<SysRoleEntity> sysRoleEntities = sysRoleService.findByParames(map);
-        //total
-        int total = sysRoleService.countByParames(map);
-        //封装数据
-        JSONObject object = new JSONObject();
-        object.put("data", sysRoleEntities);
-        object.put("total", total);
-        return object;
+            map.put("limit",query.getLimit());
+            map.put("offset",query.getOffset());
+            map.put("sort", query.getSort());
+            map.put("order", query.getOrder());
+            //数据集合
+            List<SysRoleEntity> sysRoleEntities = sysRoleService.findByParames(map);
+            //total
+            int total = sysRoleService.countByParames(map);
+            //封装数据
+            JSONObject object = new JSONObject();
+            object.put("data", sysRoleEntities);
+            object.put("total", total);
+            resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+            resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+            resultEntity.setData(object);
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
     }
 
     /**

@@ -22,7 +22,7 @@
                 <if test="username != null and username != ''">and su.username like CONCAT('%', #{username}, '%')</if>
                 <if test="status != null and status != ''">and su.status = #{status}</if>
                 <if test="startTime != null and endTime != null">and su.create_time between #{startTime} and #{endTime}</if>
-                <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+                <!--<if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>-->
             </when>
             <otherwise>
                 select * from sys_user
@@ -30,7 +30,7 @@
                 <if test="username != null and username != ''">and username like CONCAT('%', #{username}, '%')</if>
                 <if test="status != null and status != ''">and status = #{status}</if>
                 <if test="startTime != null and endTime != null">and create_time between #{startTime} and #{endTime}</if>
-                <if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>
+                <!--<if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>-->
             </otherwise>
         </choose>
     </select>

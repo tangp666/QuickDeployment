@@ -25,9 +25,9 @@
         <if test="serverId != null and serverId != ''">
             and server_id = #{serverId}
         </if>
-        <if test="limit != null and offset != null">
-            LIMIT #{offset}, #{limit}
-        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset}, #{limit}-->
+        <!--</if>-->
     </select>
 
     <!-- 通过菜单条件查询服务器和项目关联数量 -->

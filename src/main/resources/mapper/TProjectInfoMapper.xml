@@ -28,9 +28,9 @@
         <if test="projectName != null and projectName != ''">
             and project_name like CONCAT('%', #{projectName}, '%')
         </if>
-        <if test="limit != null and offset != null">
-            LIMIT #{offset}, #{limit}
-        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset}, #{limit}-->
+        <!--</if>-->
     </select>
 
     <!-- 通过菜单条件查询服务器信息数量 -->

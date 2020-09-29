@@ -1323,10 +1323,9 @@
             data = this.getData(),
             pageList = this.options.pageList;
 
-        if (this.options.sidePagination !== 'server') {
-            this.options.totalRows = data.length;
-        }
-
+        // if (this.options.sidePagination !== 'server') {
+        //     this.options.totalRows = data.length;
+        // }
         this.totalPages = 0;
         if (this.options.totalRows) {
             if (this.options.pageSize === this.options.formatAllRows()) {
@@ -1643,7 +1642,7 @@
             }
         }
 
-        if (item._data && !$.isEmptyObject(item._data)) {
+        if (item != null && item != undefined && item._data && !$.isEmptyObject(item._data)) {
             $.each(item._data, function(k, v) {
                 // ignore data-index
                 if (k === 'index') {
@@ -2594,7 +2593,6 @@
 
     BootstrapTable.prototype.load = function (data) {
         var fixedScroll = false;
-
         // #431: support pagination
         if (this.options.sidePagination === 'server') {
             this.options.totalRows = data[this.options.totalField];
@@ -2602,6 +2600,7 @@
             data = data[this.options.dataField];
         } else if (!$.isArray(data)) { // support fixedScroll
             fixedScroll = data.fixedScroll;
+            this.options.totalRows = data.total;
             data = data.data;
         }
 
