@@ -58,11 +58,16 @@ public class TServerInfoController extends BaseController{
     public ResultEntity serverList(HttpServletRequest request, TServerInfoEntity tServerInfoEntity){
         //拼接参数
         Map<String, Object> map = new HashMap<>();
-        map.put("serverName", tServerInfoEntity.getServerName());
-        map.put("serverAddress", tServerInfoEntity.getServerAddress());
-
-        map.put("limit", tServerInfoEntity.getLimit());
-        map.put("offset", tServerInfoEntity.getOffset());
+        if(StringUtils.isNotEmpty(tServerInfoEntity.getServerName())){
+            map.put("serverName", tServerInfoEntity.getServerName());
+        }
+        if(StringUtils.isNotEmpty(tServerInfoEntity.getServerAddress())){
+            map.put("serverAddress", tServerInfoEntity.getServerAddress());
+        }
+        if(tServerInfoEntity.getLimit() != 0 && tServerInfoEntity.getOffset() != 0){
+            map.put("limit", tServerInfoEntity.getLimit());
+            map.put("offset", tServerInfoEntity.getOffset());
+        }
         //返回对象
         ResultEntity resultEntity = new ResultEntity();
         try {

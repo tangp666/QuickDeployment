@@ -1962,7 +1962,56 @@
                 var $element = $tr.next().find('td');
                 var content = calculateObjectValue(that.options, that.options.detailFormatter, [index, row, $element], '');
                 if($element.length === 1) {
-                    $element.append(content);
+                    if(content == undefined || content == 'undefined'){
+                        //添加项目管理
+                        if(that.options.url == '/project/projectList'){
+                            $.ajax({
+                                url: "/server/serverList",
+                                type: "get",
+                                cache: true,
+                                async: true,
+                                data: {
+                                    'id': row.id
+                                },
+                                success: function (r) {
+                                    var exampleTableId = "exampleTable" + row.id;
+                                    content = "";
+                                    content += "<div class=\"ibox-content\">\n" +
+                                        "                            <table id=" + exampleTableId +" data-mobile-responsive=\"true\">\n" +
+                                        "<tr>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 3%; padding: 2px; height: 36px'>序号</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>服务器名称</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>服务器地址</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>服务器端口</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 57%; padding: 2px; height: 36px'>服务器描述</th>\n" +
+                                        "  </tr>\n";
+                                    if (r.code == 0) {
+                                        var data = r.data.data;
+                                        for (var i=0; i<data.length; i++){
+                                            content += "  <tr>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 3%; padding: 2px; height: 36px'>"+ (i+1) + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ data[i].serverName + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ data[i].serverAddress + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>"+ data[i].serverProt + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 57%; padding: 2px; height: 36px'>"+ data[i].serverDesc + "</td>\n" +
+                                                "  </tr>";
+                                        }
+                                    }else {
+                                        content += "  <tr>\n" +
+                                            "    <td rowspan='6'>"+ '服务器错误' + "</td>\n" +
+                                            "  </tr>";
+                                    }
+                                    content += "                            </table>\n" +
+                                        "                        </div>";
+                                    $element.append(content);
+                                }
+                            });
+                        }else{
+                            $element.append(content);
+                        }
+                    }else {
+                        $element.append(content);
+                    }
                 }
                 that.trigger('expand-row', index, row, $element);
             }

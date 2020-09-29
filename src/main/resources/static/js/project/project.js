@@ -24,9 +24,9 @@ function load() {
                 // //发送到服务器的数据编码类型
                 pageSize : 10, // 如果设置了分页，每页数据条数
                 pageNumber : 1, // 如果设置了分布，首页页码
-                search : true, // 是否显示搜索框
-                showColumns : true, // 是否显示内容下拉框（选择显示的列）
-                showRefresh : true, // 是否显示内容下拉框（选择显示的列）
+                search : false, // 是否显示搜索框
+                showColumns : false, // 是否显示内容下拉框（选择显示的列）
+                showRefresh : false, // 是否显示内容下拉框（选择显示的列）
                 sidePagination : "client", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                 queryParams : function(params) {
                     return {
@@ -101,12 +101,8 @@ function load() {
                     }],
                 detailView: true,
                 detailFormatter: function (index, row) {
-                    var str = "";
-                    str = "<form> ";
-                    str += "测试";
-                    str += "</form>";
-                    return str;
-                }
+
+                },
             });
 }
 
