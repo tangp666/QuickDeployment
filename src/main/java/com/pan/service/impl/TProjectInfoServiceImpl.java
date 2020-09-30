@@ -1,7 +1,9 @@
 package com.pan.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pan.dao.TProjectInfoDao;
 import com.pan.dao.TProjectServerDao;
+import com.pan.entity.ResultEntity;
 import com.pan.entity.TProjectInfoEntity;
 import com.pan.entity.TServerInfoEntity;
 import com.pan.service.TProjectInfoService;
@@ -113,23 +115,39 @@ public class TProjectInfoServiceImpl implements TProjectInfoService {
          * 第二步 解压文件， mvn打包文件
          */
         //将下载下来的文件解压至当前文件夹
-        ZipUtils.unZip(toPropertyUrl, propertyUrl);
+        ResultEntity resultEntity = ZipUtils.unZip(toPropertyUrl, propertyUrl);
+        JSONObject data = resultEntity.getData();
+        String filename = "";
+        if(StringUtils.isNotEmpty(data)){
+            filename = (String) data.get("filename");
+        }
         //寻找解压后的pom文件
-        String pomUrl = propertyUrl + "/QuickDeployment-master/pom.xml";
+        String pomUrl = propertyUrl + "/" + filename + "/pom.xml";
         //mvn打包
         MVNUtils.mvnPackage(pomUrl, PropertyUtil.getValue("mvn_order"), PropertyUtil.getValue("mvn_home"));
         /**
          * 第三步查询项目的服务器位置，及服务器源码上传位置
          */
+        //寻找mvn打包后的jar文件
+        String[] fileList=new File(propertyUrl + "/" + filename + "/target/").list();
+        String jarUrl = "";
+        for (String fileNmae : fileList) {
+            if (StringUtils.isNotEmpty(fileNmae) && fileNmae.endsWith(".jar")){
+                jarUrl = propertyUrl + "/" + filename + "target/" + fileNmae;
+            }
+        }
+        if (!StringUtils.isNotEmpty(jarUrl)){
+            throw new NullPointerException("mvn打包文件不存在！");
+        }
 //        Map<String, Object> projectServerMap = new HashMap<>();
 //        projectServerMap.put("projectId", id);
 //        List<TServerInfoEntity> tServerInfoLists = tProjectServerDao.findTServerInfoLists(projectServerMap);
-        //多线程执行项目上传
-        /**
-         * 第四步 在多线程执行中进行执行 重启项目
-         */
+//        //多线程执行项目上传
 //        for (TServerInfoEntity tServerInfo : tServerInfoLists) {
-//            UploadServerTask task = new UploadServerTask(new File(propertyUrl + "/" + tProjectInfoEntity.getSourceCodeName()), tProjectInfoEntity.getSourceCodeName(), tServerInfo);
+//            /**
+//             * 第四步 在多线程执行中进行执行 重启项目
+//             */
+//            UploadServerTask task = new UploadServerTask(new File(""), tProjectInfoEntity.getSourceCodeName(), tServerInfo);
 //            ThreadPoolServiceUtils.getInstance().execute(task);
 //        }
     }

@@ -1,5 +1,6 @@
 package com.pan.util;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pan.entity.ResultEntity;
 import com.pan.enums.ResultEnum;
 import org.slf4j.Logger;
@@ -71,15 +72,22 @@ public class ZipUtils {
         //返回对象
         int code = -1;
         String message = "";
+        JSONObject object = new JSONObject();
         try {
             zipFile = new ZipFile(fileUrl);
             //File自身的遍历对象
             Enumeration<?> entries = zipFile.entries();
+            int  i = 0;
             while (entries.hasMoreElements()){
                 byte[] buf = new byte[buffer];
                 ZipEntry entry = (ZipEntry)entries.nextElement();
                 //文件名称
                 String filename = entry.getName();
+                //获取zip文件内的包名
+                if(i == 0){
+                    object.put("filename",filename);
+                    i++;
+                }
                 //目录是否存在
                 boolean ismkdir = false;
                 //检验此文件是否带有文件夹
@@ -139,7 +147,8 @@ public class ZipUtils {
                 e.printStackTrace();
             }
         }
-        return new ResultEntity(code,message);
+
+        return new ResultEntity(code,message,object);
     }
 
 
