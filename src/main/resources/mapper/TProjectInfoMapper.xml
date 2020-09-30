@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pan.dao.TProjectInfoDao">
 
-    <!-- 根据id查询服务器信息 -->
+    <!-- 根据id查询项目信息 -->
     <select id="findById" resultType="com.pan.entity.TProjectInfoEntity" parameterType="java.lang.Long">
         select * from  t_project_info where id = ${id};
     </select>
-    <!-- 查询所有的服务器信息 -->
+    <!-- 查询所有的项目信息 -->
     <select id="findALL" resultType="com.pan.entity.TProjectInfoEntity">
         select * from t_project_info
     </select>
-    <!-- 查询所有的服务器信息数量 -->
+    <!-- 查询所有的项目信息数量 -->
     <select id="countAll" resultType="java.lang.Integer">
         select count(1) from t_project_info
     </select>
 
-    <!-- 通过菜单条件查询服务器信息集合 -->
+    <!-- 通过菜单条件查询项目信息集合 -->
     <select id="findByParames" resultType="com.pan.entity.TProjectInfoEntity" parameterType="java.util.Map">
         select * from t_project_info
         where 1 = 1
@@ -33,7 +33,7 @@
         <!--</if>-->
     </select>
 
-    <!-- 通过菜单条件查询服务器信息数量 -->
+    <!-- 通过菜单条件查询项目信息数量 -->
     <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_project_info
         where 1 = 1

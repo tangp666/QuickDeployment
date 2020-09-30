@@ -10,7 +10,7 @@
     <select id="findALL" resultType="com.pan.entity.TServerInfoEntity">
         select * from t_server_info
     </select>
-    <!-- 查询所有的服务器信息和项目关联数量 -->
+    <!-- 查询所有的服务器信息数量 -->
     <select id="countAll" resultType="java.lang.Integer">
         select count(1) from t_server_info
     </select>

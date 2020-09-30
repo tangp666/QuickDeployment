@@ -6,16 +6,16 @@
     <select id="findById" resultType="com.pan.entity.SysRoleMenuEntity" parameterType="java.lang.Long">
         select * from sys_role_menu where id = ${id};
     </select>
-    <!-- 查询所有的角色信息 -->
+    <!-- 查询所有的角色菜单信息 -->
     <select id="findALL" resultType="com.pan.entity.SysRoleMenuEntity">
         select * from sys_role_menu
     </select>
-    <!-- 查询所有的角色信息数量 -->
+    <!-- 查询所有的角色菜单信息数量 -->
     <select id="countAll" resultType="java.lang.Integer">
         select count(1) from sys_role_menu
     </select>
 
-    <!-- 通过菜单条件查询角色信息集合 -->
+    <!-- 通过菜单条件查询角色菜单信息集合 -->
     <select id="findByParames" resultType="com.pan.entity.SysRoleMenuEntity" parameterType="java.util.Map">
         select * from sys_role_menu where 1 = 1
         <if test="roleId != null and roleId != ''">
@@ -35,7 +35,7 @@
         <!--</if>-->
     </select>
 
-    <!-- 通过菜单条件查询角色信息数量 -->
+    <!-- 通过菜单条件查询角色菜单信息数量 -->
     <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from sys_role where 1 = 1
         <if test="roleId != null and roleId != ''">

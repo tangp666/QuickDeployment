@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pan.dao.TProjectFilePathInfoDao">
+
+    <!-- 根据id查询服务器文件信息 -->
+    <select id="findById" resultType="com.pan.entity.TProjectFilePathInfoEntity" parameterType="java.lang.Long">
+        select * from t_project_file_path_info where id = ${id};
+    </select>
+    <!-- 查询所有的服务器文件信息 -->
+    <select id="findALL" resultType="com.pan.entity.TProjectFilePathInfoEntity">
+        select * from t_project_file_path_info
+    </select>
+    <!-- 查询所有的服务器文件数量 -->
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(1) from t_project_file_path_info
+    </select>
+
+    <!-- 通过菜单条件查询服务器文件集合 -->
+    <select id="findByParames" resultType="com.pan.entity.TProjectFilePathInfoEntity" parameterType="java.util.Map">
+        select * from t_project_file_path_info
+        where 1 = 1
+        <if test="fileType != null and fileType != ''">
+            and file_type = #{fileType}
+        </if>
+        <if test="fileName != null and fileName != ''">
+            and file_name like CONCAT('%', #{fileName}, '%')
+        </if>
+        <!--<if test="limit != null and offset != null">-->
+            <!--LIMIT #{offset}, #{limit}-->
+        <!--</if>-->
+    </select>
+
+    <!-- 通过菜单条件查询服务器文件数量 -->
+    <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from t_project_file_path_info
+        where 1 = 1
+        <if test="fileType != null and fileType != ''">
+            and file_type = #{fileType}
+        </if>
+        <if test="fileName != null and fileName != ''">
+            and file_name like CONCAT('%', #{fileName}, '%')
+        </if>
+    </select>
+
+    <!-- 插入信息 -->
+    <insert id="insert" parameterType="com.pan.entity.TProjectFilePathInfoEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into t_project_file_path_info(file_path, file_name,
+        <if test="fileType != null and fileType != ''"> file_type, </if>
+         create_user_id, create_time)
+        values(#{filePath}, #{fileName},
+        <if test="fileType != null and fileType != ''"> #{fileType}, </if>
+        #{createUserId}, #{createTime});
+    </insert>
+    <!-- 修改信息 -->
+    <update id="update" parameterType="com.pan.entity.TProjectFilePathInfoEntity">
+        update t_project_file_path_info
+        <set>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="fileType != null and fileType != ''">file_type = #{fileType},</if>
+            <if test="createUserId != null">create_user_id = #{createUserId},</if>
+            <if test="createTime != null">create_time = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from t_project_file_path_info where id = #{id};
+    </delete>
+    <!-- 批量删除 -->
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from t_project_file_path_info where 1 = 1
+        <if test="ids != null and ids.size() > 0">
+            and id in
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
+    </delete>
+</mapper>

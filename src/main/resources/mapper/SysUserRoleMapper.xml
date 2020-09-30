@@ -9,11 +9,11 @@
     <select id="findALL" resultType="com.pan.entity.SysUserRoleEntity">
         select * from sys_user_role
     </select>
-    <!-- 查询所有用户信息 -->
+    <!-- 查询所有用户角色信息 -->
     <select id="countAll" resultType="com.pan.entity.SysUserRoleEntity">
         select count(1) from sys_user_role
     </select>
-    <!-- 根加条件查询用户信息 -->
+    <!-- 根加条件查询用户角色信息 -->
     <select id="findByParames" resultType="com.pan.entity.SysUserRoleEntity" parameterType="java.util.Map">
         select * from sys_user_role
         where  1 = 1
@@ -21,7 +21,7 @@
         <if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
         <!--<if test="limit != null and offset != null">LIMIT #{offset} , #{limit}</if>-->
     </select>
-    <!-- 根加条件查询用户信息 -->
+    <!-- 根加条件查询用户角色信息 -->
     <select id="countByParames" resultType="com.pan.entity.SysUserRoleEntity" parameterType="java.util.Map">
         select count(1) from sys_user_role
         where  1 = 1
