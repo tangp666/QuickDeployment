@@ -190,4 +190,26 @@ public class TProjectInfoController extends BaseController {
         return resultEntity;
     }
 
+    /**
+     * 项目重构
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "rebuild", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultEntity rebuild(@RequestParam("id") long id){
+        ResultEntity resultEntity = new ResultEntity();
+        try {
+            //构建
+            tProjectInfoService.rebuild(id);
+            resultEntity.setCode(ResultEnum.SUCCESS.getCode());
+            resultEntity.setMessage(ResultEnum.SUCCESS.getMessage());
+        } catch (Exception e) {
+            resultEntity.setCode(ResultEnum.EXCEPTION.getCode());
+            resultEntity.setMessage(ResultEnum.EXCEPTION.getMessage());
+            e.printStackTrace();
+        }
+        return resultEntity;
+    }
+
 }

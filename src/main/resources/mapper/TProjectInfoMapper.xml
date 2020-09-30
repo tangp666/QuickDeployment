@@ -50,13 +50,15 @@
 
     <!-- 插入信息 -->
     <insert id="insert" parameterType="com.pan.entity.TProjectInfoEntity" useGeneratedKeys="true" keyProperty="id">
-        insert into t_project_info(project_name, project_desc, create_user_id, create_time) values (#{projectName}, #{projectDesc}, #{createUserId}, #{createTime});
+        insert into t_project_info(project_name, project_source_code_url, source_code_name, project_desc, create_user_id, create_time) values (#{projectName}, #{projectSourceCodeUrl}, #{sourceCodeName}, #{projectDesc}, #{createUserId}, #{createTime});
     </insert>
     <!-- 修改信息 -->
     <update id="update" parameterType="com.pan.entity.TProjectInfoEntity">
         update t_project_info
         <set>
             <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="projectSourceCodeUrl != null">project_source_code_url = #{projectSourceCodeUrl},</if>
+            <if test="sourceCodeName != null">source_code_name = #{sourceCodeName},</if>
             <if test="projectDesc != null">project_desc = #{projectDesc},</if>
             <if test="createUserId != null">create_user_id = #{createUserId},</if>
             <if test="createTime != null">create_time = #{createTime}</if>

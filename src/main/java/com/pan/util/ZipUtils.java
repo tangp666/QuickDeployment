@@ -86,7 +86,7 @@ public class ZipUtils {
                 if(filename.lastIndexOf("/") != 0){
                     ismkdir = true;
                 }
-                filename = savePath + filename;
+                filename = savePath + "/" + filename;
                 //如果是文件夹 创建
                 if(entry.isDirectory()){
                     file = new File(filename);

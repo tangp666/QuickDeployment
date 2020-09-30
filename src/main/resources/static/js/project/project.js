@@ -69,7 +69,21 @@ function load() {
                         title: '项目名称',
                         align: 'center',
                         valign: 'center',
-                        width: '23.3%'
+                        width: '18.3%'
+                    },
+                    {
+                        field: 'projectSourceCodeUrl',
+                        title: '项目源码路径',
+                        align: 'center',
+                        valign: 'center',
+                        width: '15%'
+                    },
+                    {
+                        field: 'sourceCodeName',
+                        title: '项目源码名称',
+                        align: 'center',
+                        valign: 'center',
+                        width: '10%'
                     },
                     {
                         field: 'projectDesc',
@@ -77,7 +91,7 @@ function load() {
                         align: 'center',
                         align: 'center',
                         valign: 'center',
-                        width: '45%',
+                        width: '25%',
                         cellStyle: formatTableUnit
                     },
                     {
@@ -165,5 +179,23 @@ function remove(id) {
 }
 
 function rebuild(id) {
-    alert("项目构建,构建项目id：" + id);
+    layer.confirm('确定要重构该项目？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            url: "/project/rebuild",
+            type: "post",
+            data: {
+                'id': id
+            },
+            success: function (r) {
+                if (r.code == 0) {
+                    layer.msg("构建" + r.message);
+                    reLoad();
+                } else {
+                    layer.msg(r.message);
+                }
+            }
+        });
+    })
 }

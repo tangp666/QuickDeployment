@@ -39,13 +39,24 @@ public class MVNUtils {
         //mavenHome
         invoker.setMavenHome(new File(mavenHomeUrl));
 //      自定义输出
-//        invoker.setLogger(new PrintStreamLogger(System.err,  InvokerLogger.ERROR){
-//        } );
-//        invoker.setOutputHandler(new InvocationOutputHandler() {
-//            @Override
-//            public void consumeLine(String s) throws IOException {
-//            }
-//        });
+        invoker.setLogger(new PrintStreamLogger(System.err,  InvokerLogger.ERROR){
+
+        } );
+        //控制台输出
+        invoker.setOutputHandler(new InvocationOutputHandler() {
+            @Override
+            public void consumeLine(String s) throws IOException {
+//                Runtime runtime=Runtime.getRuntime();
+//                Process process=null;
+//                try {
+//                    process= runtime.exec("cmd /c   cd D:\\work\\MyWordSpace\\HotSwap && mvn compile");
+//                    process.waitFor();
+//                    process.destroy();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+            }
+        });
         int code = -1;
         String message = "";
         //执行命令
@@ -60,15 +71,16 @@ public class MVNUtils {
             LOGGER.error("mvn打包失败");
             e.printStackTrace();
         }
-//        try{
-//            if(invoker.execute(request).getExitCode()==0){
-//                  System.out.println("success");
-//            }else{
-//                  System.err.println("error");
-//            }
-//        }catch (MavenInvocationException e) {
-//            e.printStackTrace();
-//        }
+        //判断mvn是否执行成功
+        try{
+            if(invoker.execute(request).getExitCode()==0){
+                  System.out.println("success");
+            }else{
+                  System.err.println("error");
+            }
+        }catch (MavenInvocationException e) {
+            e.printStackTrace();
+        }
         return new ResultEntity(code, message);
     }
 }

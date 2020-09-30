@@ -19,8 +19,8 @@ class QuickdeploymentApplicationTests {
 
     @Test
     void contextLoads() {
-        List<SysMenuEntity> all = sysMenuService.findALL();
-        System.out.println(all.size());
+//        List<SysMenuEntity> all = sysMenuService.findALL();
+//        System.out.println(all.size());
     }
 
     /**
@@ -28,8 +28,8 @@ class QuickdeploymentApplicationTests {
      */
     @Test
     void testDownLoadNet(){
-        DownLoadUtils.downLoadNet("https://github.com/tangp666/QuickDeployment/archive/master.zip",
-                "E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
+//        DownLoadUtils.downLoadNet("https://github.com/tangp666/QuickDeployment/archive/master.zip",
+//                "E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
     }
 
     /**
@@ -37,7 +37,7 @@ class QuickdeploymentApplicationTests {
      */
     @Test
     void testUnZip(){
-        ZipUtils.unZip("E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
+//        ZipUtils.unZip("E:\\workspace\\QuickDeployment\\file\\QuickDeployment.zip");
     }
 
     /**
@@ -45,9 +45,9 @@ class QuickdeploymentApplicationTests {
      */
     @Test
     void testMvnPackage(){
-        MVNUtils.mvnPackage("E:\\workspace\\QuickDeployment\\file\\QuickDeployment\\QuickDeployment-master\\pom.xml",
-                //"mvn package",
-                "clean package",
-                "E:\\apache-maven-3.6.2");
+//        MVNUtils.mvnPackage("E:\\workspace\\QuickDeployment\\file\\QuickDeployment\\QuickDeployment-master\\pom.xml",
+//                //"mvn package",
+//                "clean package",
+//                "E:\\apache-maven-3.6.2");
     }
 }
