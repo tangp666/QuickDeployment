@@ -6,6 +6,7 @@ import com.pan.dao.TProjectServerDao;
 import com.pan.entity.ResultEntity;
 import com.pan.entity.TProjectInfoEntity;
 import com.pan.entity.TServerInfoEntity;
+import com.pan.query.TServerInfoQuery;
 import com.pan.service.TProjectInfoService;
 import com.pan.thread.UploadServerTask;
 import com.pan.util.*;
@@ -139,16 +140,16 @@ public class TProjectInfoServiceImpl implements TProjectInfoService {
         if (!StringUtils.isNotEmpty(jarUrl)){
             throw new NullPointerException("mvn打包文件不存在！");
         }
-//        Map<String, Object> projectServerMap = new HashMap<>();
-//        projectServerMap.put("projectId", id);
-//        List<TServerInfoEntity> tServerInfoLists = tProjectServerDao.findTServerInfoLists(projectServerMap);
-//        //多线程执行项目上传
-//        for (TServerInfoEntity tServerInfo : tServerInfoLists) {
-//            /**
-//             * 第四步 在多线程执行中进行执行 重启项目
-//             */
-//            UploadServerTask task = new UploadServerTask(new File(""), tProjectInfoEntity.getSourceCodeName(), tServerInfo);
-//            ThreadPoolServiceUtils.getInstance().execute(task);
-//        }
+        Map<String, Object> projectServerMap = new HashMap<>();
+        projectServerMap.put("projectId", id);
+        List<TServerInfoQuery> tServerInfoLists = tProjectServerDao.findTServerInfoLists(projectServerMap);
+        //多线程执行项目上传
+        for (TServerInfoEntity tServerInfo : tServerInfoLists) {
+            /**
+             * 第四步 在多线程执行中进行执行 重启项目
+             */
+            UploadServerTask task = new UploadServerTask(new File(""), "", tServerInfo);
+            ThreadPoolServiceUtils.getInstance().execute(task);
+        }
     }
 }

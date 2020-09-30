@@ -80,9 +80,10 @@
     </delete>
 
     <!-- 通过菜单条件查询服务器信息 -->
-    <select id="findTServerInfoLists" resultType="com.pan.entity.TServerInfoEntity" parameterType="java.util.Map">
-        select tsi.* from
+    <select id="findTServerInfoLists" resultType="com.pan.query.TServerInfoQuery" parameterType="java.util.Map">
+        select tsi.*, tpf.file_name as fileName, tpf.file_path as filePath from
           t_server_info tsi LEFT JOIN t_project_server tps ON tsi.id = tps.server_id
+          LEFT JOIN t_project_file_path_info tpf ON tsi.id = tpf.server_id and tpf.project_id = #{projectId}
         where 1 = 1
         <if test="projectId != null and projectId != ''">
             and tps.project_id = #{projectId}
@@ -91,4 +92,12 @@
             and tps.server_id = #{serverId}
         </if>
     </select>
+
+    <!--批量 插入信息 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into t_project_server(project_id, server_id) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.projectId}, #{item.serverId})
+        </foreach>
+    </insert>
 </mapper>

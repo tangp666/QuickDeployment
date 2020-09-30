@@ -19,7 +19,7 @@
     <select id="findByParames" resultType="com.pan.entity.TProjectFilePathInfoEntity" parameterType="java.util.Map">
         select * from t_project_file_path_info
         where 1 = 1
-        <if test="fileType != null and fileType != ''">
+        <if test="fileType != null and fileType != -1">
             and file_type = #{fileType}
         </if>
         <if test="fileName != null and fileName != ''">
@@ -34,7 +34,7 @@
     <select id="countByParames" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(1) from t_project_file_path_info
         where 1 = 1
-        <if test="fileType != null and fileType != ''">
+        <if test="fileType != null and fileType != -1">
             and file_type = #{fileType}
         </if>
         <if test="fileName != null and fileName != ''">
@@ -44,12 +44,17 @@
 
     <!-- 插入信息 -->
     <insert id="insert" parameterType="com.pan.entity.TProjectFilePathInfoEntity" useGeneratedKeys="true" keyProperty="id">
-        insert into t_project_file_path_info(file_path, file_name,
-        <if test="fileType != null and fileType != ''"> file_type, </if>
-         create_user_id, create_time)
+        insert into t_project_file_path_info(file_path, file_name, file_type, server_id, project_id ,create_user_id, create_time)
         values(#{filePath}, #{fileName},
-        <if test="fileType != null and fileType != ''"> #{fileType}, </if>
-        #{createUserId}, #{createTime});
+        <choose>
+            <when test="fileType != null and fileType != -1">
+                #{fileType},
+            </when>
+            <otherwise>
+                null,
+            </otherwise>
+        </choose>
+        #{serverId}, #{projectId} ,#{createUserId}, #{createTime});
     </insert>
     <!-- 修改信息 -->
     <update id="update" parameterType="com.pan.entity.TProjectFilePathInfoEntity">
@@ -57,7 +62,16 @@
         <set>
             <if test="filePath != null">file_path = #{filePath},</if>
             <if test="fileName != null">file_name = #{fileName},</if>
-            <if test="fileType != null and fileType != ''">file_type = #{fileType},</if>
+            <choose>
+                <when test="fileType != null and fileType != -1">
+                    file_type = #{fileType},
+                </when>
+                <otherwise>
+                    file_type = null,
+                </otherwise>
+            </choose>
+            <if test="serverId != null">server_id = #{serverId},</if>
+            <if test="projectId != null">project_id = #{projectId},</if>
             <if test="createUserId != null">create_user_id = #{createUserId},</if>
             <if test="createTime != null">create_time = #{createTime}</if>
         </set>
@@ -77,4 +91,25 @@
             </foreach>
         </if>
     </delete>
+
+    <!-- 通过菜单条件查询服务器文件集合 -->
+    <select id="findQueryByParames" resultType="com.pan.query.TProjectFilePathInfoQuery" parameterType="java.util.Map">
+        SELECT
+          tpf.*, tsi.server_name as serverName, tsi.server_address as serverAddress, tpi.project_name as projectName
+        FROM
+          t_project_file_path_info tpf
+        LEFT JOIN t_server_info tsi ON tpf.server_id = tsi.id
+        LEFT JOIN t_project_info tpi ON tpf.project_id = tpi.id
+        where 1 = 1
+        <if test="fileType != null and fileType != -1">
+            and tpf.file_type = #{fileType}
+        </if>
+        <if test="fileName != null and fileName != ''">
+            and tpf.file_name like CONCAT('%', #{fileName}, '%')
+        </if>
+        <!--<if test="limit != null and offset != null">-->
+        <!--LIMIT #{offset}, #{limit}-->
+        <!--</if>-->
+    </select>
+
 </mapper>

@@ -23,11 +23,11 @@
             <div class="ibox-body">
                 <div class="fixed-table-toolbar">
                     <div class="col-sm-4 form-group clearfix" style="margin-left: 20px;">
-                        <button shiro:hasPermission="sys:menu:add" type="button"
+                        <button type="button"
                                 class="btn btn-primary" title="在根节点下添加菜单" onclick="add('0')">
                             <i class="fa fa-plus" aria-hidden="true"></i>添加
                         </button>
-                        <button shiro:hasPermission="sys:menu:batchRemove" type="button"
+                        <button type="button"
                                 class="btn btn-danger" onclick="batchRemove()">
                             <i class="fa fa-trash" aria-hidden="true"></i>删除
                         </button>
@@ -39,29 +39,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--shiro控制bootstraptable行内按钮看见性 来自simple的创新方案 -->
-    <div>
-        <script type="text/javascript">
-            var s_add_h = 'hidden';
-            var s_edit_h = 'hidden';
-            var s_remove_h = 'hidden';
-        </script>
-    </div>
-    <div shiro:hasPermission="sys:menu:add">
-        <script type="text/javascript">
-            s_add_h = '';
-        </script>
-    </div>
-    <div shiro:hasPermission="sys:menu:edit">
-        <script type="text/javascript">
-            s_edit_h = '';
-        </script>
-    </div>
-    <div shiro:hasPermission="sys:menu:remove">
-        <script type="text/javascript">
-            s_remove_h = '';
-        </script>
     </div>
 </div>
 <div th:include="include :: footer"></div>

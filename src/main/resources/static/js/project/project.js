@@ -68,30 +68,19 @@ function load() {
                         field: 'projectName',
                         title: '项目名称',
                         align: 'center',
-                        valign: 'center',
                         width: '18.3%'
                     },
                     {
                         field: 'projectSourceCodeUrl',
                         title: '项目源码路径',
                         align: 'center',
-                        valign: 'center',
-                        width: '15%'
-                    },
-                    {
-                        field: 'sourceCodeName',
-                        title: '项目源码名称',
-                        align: 'center',
-                        valign: 'center',
-                        width: '10%'
+                        width: '30%'
                     },
                     {
                         field: 'projectDesc',
                         title: '项目描述',
                         align: 'center',
-                        align: 'center',
-                        valign: 'center',
-                        width: '25%',
+                        width: '26%',
                         cellStyle: formatTableUnit
                     },
                     {
@@ -99,18 +88,21 @@ function load() {
                         field : 'id',
                         align : 'center',
                         valign: 'center',
-                        width: '25%',
+                        width: '19%',
                         formatter : function(value, row, index) {
-                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                            var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
                                 + row.id
                                 + '\')">编辑</a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                            var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.id
                                 + '\')">删除</a> ';
-                            var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="一键构建"  mce_href="#" onclick="rebuild(\''
+                            var g = '<a class="btn btn-warning btn-sm" href="#" title="选中服务器"  mce_href="#" onclick="addServer(\''
+                                + row.id
+                                + '\')">选中服务器</a> ';
+                            var f = '<a class="btn btn-success btn-sm" href="#" title="一键构建"  mce_href="#" onclick="rebuild(\''
                                 + row.id
                                 + '\')">一键构建</a> ';
-                            return e + d + f;
+                            return e + d + g + f;
                         }
                     }],
                 detailView: true,
@@ -177,6 +169,18 @@ function remove(id) {
         });
     })
 }
+
+function addServer(id){
+    layer.open({
+        type: 2,
+        title: '服务器列表',
+        maxmin: true,
+        shadeClose: false, // 点击遮罩关闭层
+        area: ['800px', '520px'],
+        content: '/project/serverTree/' + id // iframe的url
+    });
+}
+
 
 function rebuild(id) {
     layer.confirm('确定要重构该项目？', {

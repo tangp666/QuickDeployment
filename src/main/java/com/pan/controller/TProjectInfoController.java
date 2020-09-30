@@ -212,4 +212,16 @@ public class TProjectInfoController extends BaseController {
         return resultEntity;
     }
 
+    /**
+     * 跳转服务器列表 选中服务器
+     * @param id 项目id
+     * @return
+     */
+    @RequestMapping("serverTree/{id}")
+    public String serverList(Model model, @PathVariable("id") long id){
+        TProjectInfoEntity tProjectInfoEntity = tProjectInfoService.findById(id);
+        model.addAttribute("tProjectInfoEntity",tProjectInfoEntity);
+        return "project/serverList";
+    }
+
 }

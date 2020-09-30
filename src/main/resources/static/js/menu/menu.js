@@ -73,11 +73,11 @@ function load() {
             align: 'center',
             valign: 'center',
             formatter: function (value, item, index) {
-                var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
                     + item.menuId + '\')">编辑</a> ';
-                var p = '<a class="btn btn-primary btn-sm '+ s_add_h + '" href="#" mce_href="#" title="添加下级" onclick="add(\''
+                var p = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="添加下级" onclick="add(\''
                     + item.menuId + '\')">添加下级</a> ';
-                var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
                     + item.menuId + '\')">删除</a> ';
                 return e + d + p;
             }

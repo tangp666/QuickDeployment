@@ -47,7 +47,7 @@
                         <div class="columns pull-right col-md-2 nopadding">
                             <select class="form-control" id="fileType">
                                 <option value="-1">所有</option>
-                                <option value="0">jar</option>
+                                <option value="1">jar</option>
                             </select>
                         </div>
                         <div class="ibox-content">
@@ -60,35 +60,6 @@
         </div>
     </div>
     <!--shiro控制bootstraptable行内按钮看见性 来自simple的创新方案 -->
-</div>
-<div>
-    <script type="text/javascript">
-        var s_assign_h = 'hidden';
-        var s_edit_h = 'hidden';
-        var s_remove_h = 'hidden';
-        var s_resetPwd_h = 'hidden';
-    </script>
-</div>
-<div shiro:hasPermission="simple:sysUser:edit">
-    <script type="text/javascript">
-        s_edit_h = '';
-    </script>
-</div>
-<div shiro:hasPermission="simple:sysUser:remove">
-    <script type="text/javascript">
-        var s_remove_h = '';
-    </script>
-</div>
-<div shiro:hasPermission="simple:sysUser:resetPwd">
-    <script type="text/javascript">
-        var s_resetPwd_h = '';
-    </script>
-</div>
-<div shiro:hasPermission="simple:siteUser:add">
-    <script type="text/javascript">
-        var s_assign_h = '';
-    </script>
-</div>
 </div>
 <div th:include="include :: footer"></div>
 <script type="text/javascript" src="/static/js/filepath/filepath.js"></script>

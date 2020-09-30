@@ -56,7 +56,6 @@ function load() {
                         title : '序号', // 列标题
                         width: '5%',
                         align: 'center',
-                        valign: 'center',
                         formatter: function (value, row, index) {
                             //获取每页显示的数量
                             var pageSize=$('#exampleTable').bootstrapTable('getOptions').pageSize;
@@ -69,25 +68,39 @@ function load() {
                         field: 'fileName',
                         title: '文件名称',
                         align: 'center',
-                        valign: 'center',
+                        width: '10%'
+                    },
+                    {
+                        field: 'serverName',
+                        title: '服务器名称',
+                        align: 'center',
+                        width: '15%'
+                    },
+                    {
+                        field: 'serverAddress',
+                        title: '服务器地址',
+                        align: 'center',
                         width: '20%'
                     },
                     {
                         field: 'filePath',
                         title: '文件地址',
                         align: 'center',
-                        valign: 'center',
-                        width: '50%'
+                        width: '15%'
+                    },
+                    {
+                        field: 'projectName',
+                        title: '项目名称',
+                        align: 'center',
+                        width: '15%'
                     },
                     {
                         field: 'fileType',
                         title: '文件类型',
                         align: 'center',
-                        align: 'center',
-                        valign: 'center',
                         width: '10%',
                         formatter : function(value, row, index) {
-                            if(value == 0){
+                            if(value == 1){
                                 return "jar"
                             }else {
                                 return "--";
@@ -98,13 +111,12 @@ function load() {
                         title : '操作',
                         field : 'id',
                         align : 'center',
-                        valign: 'center',
-                        width: '15%',
+                        width: '10%',
                         formatter : function(value, row, index) {
-                            var e = '<a  class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                            var e = '<a  class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
                                 + row.id
                                 + '\')">编辑</a> ';
-                            var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+                            var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="remove(\''
                                 + row.id
                                 + '\')">删除</a> ';
                             return e + d;

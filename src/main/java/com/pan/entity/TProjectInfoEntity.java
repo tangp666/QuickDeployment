@@ -20,9 +20,6 @@ public class TProjectInfoEntity extends BaseEntity implements Serializable {
     /* 项目源码位置 */
     @Column(name = "project_source_code_url")
     private String projectSourceCodeUrl;
-    /* 项目打包文件名 jar包 */
-    @Column(name = "source_code_name")
-    private String sourceCodeName;
     /* 项目描述 */
     @Column(name = "project_desc")
     private String projectDesc;
@@ -47,14 +44,6 @@ public class TProjectInfoEntity extends BaseEntity implements Serializable {
 
     public void setProjectSourceCodeUrl(String projectSourceCodeUrl) {
         this.projectSourceCodeUrl = projectSourceCodeUrl;
-    }
-
-    public String getSourceCodeName() {
-        return sourceCodeName;
-    }
-
-    public void setSourceCodeName(String sourceCodeName) {
-        this.sourceCodeName = sourceCodeName;
     }
 
     public String getProjectDesc() {

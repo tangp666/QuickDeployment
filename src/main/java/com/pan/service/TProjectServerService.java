@@ -1,7 +1,7 @@
 package com.pan.service;
 
 import com.pan.entity.TProjectServerEntity;
-import com.pan.entity.TServerInfoEntity;
+import com.pan.query.TServerInfoQuery;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +24,13 @@ public interface TProjectServerService extends BaseService<TProjectServerEntity>
      * @param map 服务器信息， 项目信息
      * @return
      */
-    List<TServerInfoEntity> findTServerInfoLists(Map<String,Object> map);
+    List<TServerInfoQuery> findTServerInfoLists(Map<String,Object> map);
+
+    /**
+     * 批量插入
+     * @param list
+     * @return
+     */
+    int batchInsert(List<TProjectServerEntity> list);
 
 }

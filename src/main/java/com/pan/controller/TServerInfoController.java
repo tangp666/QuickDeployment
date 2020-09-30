@@ -6,6 +6,7 @@ import com.pan.entity.TProjectInfoEntity;
 import com.pan.entity.TProjectServerEntity;
 import com.pan.entity.TServerInfoEntity;
 import com.pan.enums.ResultEnum;
+import com.pan.query.Tree;
 import com.pan.service.TProjectInfoService;
 import com.pan.service.TProjectServerService;
 import com.pan.service.TServerInfoService;
@@ -269,6 +270,16 @@ public class TServerInfoController extends BaseController{
             e.printStackTrace();
         }
         return resultEntity;
+    }
+
+    /**
+     * 所有的服务器列表
+     * @return
+     */
+    @RequestMapping("serverTree")
+    @ResponseBody
+    public Tree<TServerInfoEntity> treeServerData(@RequestParam("projectId") long projectId){
+        return tServerInfoService.treeServerData(projectId);
     }
 
 }

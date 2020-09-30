@@ -2,6 +2,7 @@ package com.pan.service.impl;
 
 import com.pan.dao.TProjectFilePathInfoDao;
 import com.pan.entity.TProjectFilePathInfoEntity;
+import com.pan.query.TProjectFilePathInfoQuery;
 import com.pan.service.TProjectFilePathInfoServer;
 import org.springframework.stereotype.Service;
 
@@ -62,5 +63,10 @@ public class TProjectFilePathInfoServerImpl implements TProjectFilePathInfoServe
     @Override
     public int deleteBatch(List<Long> ids) {
         return tServerFilePathInfoDao.deleteBatch(ids);
+    }
+
+    @Override
+    public List<TProjectFilePathInfoQuery> findQueryByParames(Map<String, Object> map) {
+        return tServerFilePathInfoDao.findQueryByParames(map);
     }
 }

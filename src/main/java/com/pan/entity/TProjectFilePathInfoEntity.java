@@ -23,6 +23,12 @@ public class TProjectFilePathInfoEntity extends BaseEntity implements Serializab
     /* 文件类型 0：jar */
     @Column(name = "file_type")
     private long fileType;
+    /* 服务器id */
+    @Column(name = "server_id")
+    private long serverId;
+    /* 项目id */
+    @Column(name = "project_id")
+    private long projectId;
     /* 创建人 */
     @Column(name = "create_user_id")
     private long createUserId;
@@ -60,6 +66,22 @@ public class TProjectFilePathInfoEntity extends BaseEntity implements Serializab
 
     public void setCreateUserId(long createUserId) {
         this.createUserId = createUserId;
+    }
+
+    public long getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(long serverId) {
+        this.serverId = serverId;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public Date getCreateTime() {

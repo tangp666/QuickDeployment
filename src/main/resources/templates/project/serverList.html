@@ -9,22 +9,18 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <form class="form-horizontal m-t" id="signupForm">
+                        <input id="projectId"  name="projectId" th:value="${tProjectInfoEntity.id}" type="hidden" class="form-control">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span style="color:red;">*</span>项目名称：</label>
+                            <label class="col-sm-3 control-label">项目名称：</label>
                             <div class="col-sm-8">
-                                <input id="projectName" name="projectName" class="form-control" type="text">
+                                <input id="projectName" readonly name="projectName" th:value="${tProjectInfoEntity.projectName}" class="form-control" type="text">
                             </div>
                         </div>
+                        <input id="serverIds" type="hidden" name="serverIds" class="form-control">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">项目源码路径：</label>
+                            <label class="col-sm-3 control-label">服务器：</label>
                             <div class="col-sm-8">
-                                <input id="projectSourceCodeUrl" name="projectSourceCodeUrl" class="form-control" type="text">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">项目描述</label>
-                            <div class="col-sm-8">
-                                <textarea id="projectDesc" name="projectDesc" class="form-control" type="text" style="height: 100px"></textarea>
+                                <div id="serverTree"></div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -39,6 +35,6 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/static/js/project/add.js"></script>
+<script type="text/javascript" src="/static/js/project/serverList.js"></script>
 </body>
 </html>

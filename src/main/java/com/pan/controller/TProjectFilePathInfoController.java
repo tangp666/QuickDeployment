@@ -3,8 +3,13 @@ package com.pan.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.pan.entity.ResultEntity;
 import com.pan.entity.TProjectFilePathInfoEntity;
+import com.pan.entity.TProjectInfoEntity;
+import com.pan.entity.TServerInfoEntity;
 import com.pan.enums.ResultEnum;
+import com.pan.query.TProjectFilePathInfoQuery;
 import com.pan.service.TProjectFilePathInfoServer;
+import com.pan.service.TProjectInfoService;
+import com.pan.service.TServerInfoService;
 import com.pan.util.ShiroUtils;
 import com.pan.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +32,12 @@ public class TProjectFilePathInfoController extends BaseController{
 
     @Autowired
     private TProjectFilePathInfoServer tProjectFilePathInfoServer;
+
+    @Autowired
+    private TProjectInfoService tProjectInfoService;
+
+    @Autowired
+    private TServerInfoService tServerInfoService;
 
     /**
      * 跳转文件管理
@@ -57,11 +68,11 @@ public class TProjectFilePathInfoController extends BaseController{
             if(tProjectFilePathInfoEntity.getFileType() > -1){
                 map.put("fileType",tProjectFilePathInfoEntity.getFileType());
             }
-
             map.put("limit", tProjectFilePathInfoEntity.getLimit());
             map.put("offset", tProjectFilePathInfoEntity.getOffset());
             //列表
-            List<TProjectFilePathInfoEntity> tProjectFilePathInfoEntities = tProjectFilePathInfoServer.findByParames(map);
+            List<TProjectFilePathInfoQuery> tProjectFilePathInfoEntities = tProjectFilePathInfoServer.findQueryByParames(map);
+            //List<TProjectFilePathInfoEntity> tProjectFilePathInfoEntities = tProjectFilePathInfoServer.findByParames(map);
             //总数
             int total = tProjectFilePathInfoServer.countByParames(map);
             //封装参数
@@ -86,6 +97,12 @@ public class TProjectFilePathInfoController extends BaseController{
      */
     @RequestMapping("add")
     public String addFile(Model model){
+        //项目列表
+        List<TProjectInfoEntity> tProjectInfoEntities = tProjectInfoService.findALL();
+        model.addAttribute("tProjectInfoEntities", tProjectInfoEntities);
+        //服务器列表
+        List<TServerInfoEntity> tServerInfoEntities = tServerInfoService.findALL();
+        model.addAttribute("tServerInfoEntities", tServerInfoEntities);
         return "filepath/add";
     }
 
@@ -122,6 +139,12 @@ public class TProjectFilePathInfoController extends BaseController{
      */
     @RequestMapping("/edit/{id}")
     public String edit(Model model, @PathVariable("id") long id){
+        //项目列表
+        List<TProjectInfoEntity> tProjectInfoEntities = tProjectInfoService.findALL();
+        model.addAttribute("tProjectInfoEntities", tProjectInfoEntities);
+        //服务器列表
+        List<TServerInfoEntity> tServerInfoEntities = tServerInfoService.findALL();
+        model.addAttribute("tServerInfoEntities", tServerInfoEntities);
         //文件信息
         TProjectFilePathInfoEntity tProjectFilePathInfoEntity = tProjectFilePathInfoServer.findById(id);
         model.addAttribute("tProjectFilePathInfoEntity",tProjectFilePathInfoEntity);
@@ -172,6 +195,5 @@ public class TProjectFilePathInfoController extends BaseController{
         }
         return resultEntity;
     }
-
 
 }

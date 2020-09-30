@@ -1982,17 +1982,21 @@
                                         "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>服务器名称</th>\n" +
                                         "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>服务器地址</th>\n" +
                                         "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>服务器端口</th>\n" +
-                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 57%; padding: 2px; height: 36px'>服务器描述</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>文件名</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>文件路径</th>\n" +
+                                        "    <th style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 37%; padding: 2px; height: 36px'>服务器描述</th>\n" +
                                         "  </tr>\n";
                                     if (r.code == 0) {
                                         var data = r.data.data;
                                         for (var i=0; i<data.length; i++){
                                             content += "  <tr>\n" +
                                                 "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 3%; padding: 2px; height: 36px'>"+ (i+1) + "</td>\n" +
-                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ data[i].serverName + "</td>\n" +
-                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ data[i].serverAddress + "</td>\n" +
-                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>"+ data[i].serverProt + "</td>\n" +
-                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 57%; padding: 2px; height: 36px'>"+ data[i].serverDesc + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ (data[i].serverName != null ? data[i].serverName : "--") + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 15%; padding: 2px; height: 36px'>"+ (data[i].serverAddress != null ? data[i].serverAddress : "--") + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>"+ (data[i].serverProt != null ? data[i].serverProt : "--") + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>"+ (data[i].fileName != null ? data[i].fileName : "--") + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 10%; padding: 2px; height: 36px'>"+ (data[i].filePath != null ? data[i].filePath : "--") + "</td>\n" +
+                                                "    <td style='text-align:center; border: 1px solid #e4eaec; vertical-align: middle; width: 37%; padding: 2px; height: 36px'>"+ (data[i].serverDesc != null ? data[i].serverDesc : "--")  + "</td>\n" +
                                                 "  </tr>";
                                         }
                                     }else {

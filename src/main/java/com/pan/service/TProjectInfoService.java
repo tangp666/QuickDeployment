@@ -14,5 +14,4 @@ public interface TProjectInfoService extends BaseService<TProjectInfoEntity> {
      */
     void rebuild(long id);
 
-
 }
