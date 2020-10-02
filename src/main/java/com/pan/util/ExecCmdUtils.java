@@ -51,7 +51,7 @@ public class ExecCmdUtils {
         } catch (JSchException e) {
             e.printStackTrace();
         }
-        return JSchUtils.execCmd(scpConnectEntity, command);
+        return JSchUtils.execCmd(command);
     }
 
 }

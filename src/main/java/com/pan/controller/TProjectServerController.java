@@ -7,6 +7,7 @@ import com.pan.entity.TServerInfoEntity;
 import com.pan.enums.ResultEnum;
 import com.pan.query.TServerInfoQuery;
 import com.pan.service.TProjectServerService;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +70,11 @@ public class TProjectServerController {
         ResultEntity resultEntity = new ResultEntity();
         try {
             long projectId = Long.parseLong(request.getParameter("projectId"));
+            //通过项目id删除之前关联的服务器信息
+            Map<String,Object> map = new HashMap<>();
+            map.put("projectId", projectId);
+            tProjectServerService.deleteByParame(map);
+            //服务器列表
             String serverIds = request.getParameter("serverIds");
             if(serverIds != null){
                 String[] split = serverIds.split(",");

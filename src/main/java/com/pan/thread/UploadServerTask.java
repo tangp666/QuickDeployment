@@ -1,6 +1,6 @@
 package com.pan.thread;
 
-import com.pan.entity.TServerInfoEntity;
+import com.pan.query.TServerInfoQuery;
 import com.pan.util.UpLoadUtils;
 
 import java.io.File;
@@ -12,20 +12,26 @@ import java.io.File;
 public class UploadServerTask implements Runnable {
 
     //上传的文件
-    private File file;
-    //文件名
-    private String sourceCodeName;
+    private String fileUrl;
     //服务器信息
-    private TServerInfoEntity tServerInfoEntity;
+    private TServerInfoQuery tServerInfoQuery;
     //构造
-    public UploadServerTask(File file, String sourceCodeName, TServerInfoEntity tServerInfoEntity) {
-        this.file = file;
-        this.sourceCodeName = sourceCodeName;
-        this.tServerInfoEntity = tServerInfoEntity;
+    public UploadServerTask(String fileUrl, TServerInfoQuery tServerInfoQuery) {
+        this.fileUrl = fileUrl;
+        this.tServerInfoQuery = tServerInfoQuery;
     }
 
     @Override
     public void run() {
-        UpLoadUtils.upLoadFiles(file, tServerInfoEntity.getServerAddress(), tServerInfoEntity.getServerAddress(), tServerInfoEntity.getServerName(), tServerInfoEntity.getServerPassword(), tServerInfoEntity.getServerProt(), sourceCodeName);
+        /**
+         * file jar 文件
+         *  服务器路径
+         *  服务器地址
+         *  服务器账号
+         *  服务器密码
+         *  服务器端口
+         *  服务器文件名
+         */
+        UpLoadUtils.upLoadFiles(fileUrl, tServerInfoQuery.getFilePath(), tServerInfoQuery.getServerAddress(), tServerInfoQuery.getServerAccount(), tServerInfoQuery.getServerPassword(), tServerInfoQuery.getServerProt(), tServerInfoQuery.getFileName());
     }
 }

@@ -1,8 +1,12 @@
 package com.pan;
 
+import com.jcraft.jsch.JSchException;
+import com.pan.entity.ResultEntity;
+import com.pan.entity.ScpConnectEntity;
 import com.pan.entity.SysMenuEntity;
 import com.pan.service.SysMenuService;
 import com.pan.util.DownLoadUtils;
+import com.pan.util.JSchUtils;
 import com.pan.util.MVNUtils;
 import com.pan.util.ZipUtils;
 import org.junit.jupiter.api.Test;
@@ -50,4 +54,24 @@ class QuickdeploymentApplicationTests {
 //                "clean package",
 //                "E:\\apache-maven-3.6.2");
 //    }
+
+//    /**
+//       mvn打包
+//     */
+//    @Test
+//    void testJSCH(){
+//        ScpConnectEntity scpConnectEntity = new ScpConnectEntity();
+//        scpConnectEntity.setUserName("root");
+//        scpConnectEntity.setUrl("192.168.1.130");
+//        scpConnectEntity.setProt(22);
+//        scpConnectEntity.setPassWord("200300");
+//
+//        try {
+//            ResultEntity resultEntity = JSchUtils.jschConnect(scpConnectEntity);
+//            System.out.println(resultEntity.getCode());
+//        } catch (JSchException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 }

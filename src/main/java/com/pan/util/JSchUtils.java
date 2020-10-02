@@ -7,10 +7,7 @@ import com.pan.enums.ResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * ftp连接服务器
@@ -38,10 +35,16 @@ public class JSchUtils {
         String message = "";
         try {
             //创建ssh连接 默认端口22
+            //给出连接需要的用户名，ip地址以及端口号
             sshSession = jSch.getSession(scpConnectEntity.getUserName(), scpConnectEntity.getUrl(), StringUtils.isNotEmpty(scpConnectEntity.getProt()) ? scpConnectEntity.getProt() : 22);
-            sshSession.setPassword(scpConnectEntity.getPassWord());
+            //第一次登陆时候，是否需要提示信息，value可以填写 yes，no或者是ask
             sshSession.setConfig("StrictHostKeyChecking", "no");
+            //设置是否超时
+            sshSession.setTimeout(10000);
+            //设置密码
+            sshSession.setPassword(scpConnectEntity.getPassWord());
             sshSession.connect();
+
             channel = sshSession.openChannel("sftp");
             channel.connect();
 
@@ -49,7 +52,7 @@ public class JSchUtils {
             message = ResultEnum.SUCCESS.getMessage();
         } catch (JSchException e) {
             e.printStackTrace();
-            code = ResultEnum.SUCCESS.getCode();
+            code = ResultEnum.EXCEPTION.getCode();
             message = e.getMessage();
             throw new JSchException("SFTP连接服务器失败"+e.getMessage());
         }
@@ -58,11 +61,13 @@ public class JSchUtils {
 
     /**
      * 服务器创建目录 并指定到当前目录下
-     * @param scpConnectEntity
+     * @param scpConnectEntity 连接参数实体
+     * @param fileUrl 文件路径
+     * @param remoteFileName 文件名
      * @return
      * @throws JSchException
      */
-    public static boolean createDir(ScpConnectEntity scpConnectEntity) throws JSchException{
+    public static boolean createDir(ScpConnectEntity scpConnectEntity, String fileUrl, String remoteFileName) throws JSchException{
         ResultEntity resultEntity = jschConnect(scpConnectEntity);
         if(MacroelementUtils.ZERO != resultEntity.getCode()){
             throw new JSchException("服务器连接失败!");
@@ -97,6 +102,16 @@ public class JSchUtils {
                 }
             }
         }
+        //上传文件
+        try {
+            channelSftp.put(fileUrl, remoteFileName, ChannelSftp.OVERWRITE);
+        } catch (SftpException e) {
+            e.printStackTrace();
+            throw new JSchException("SFTP服务器文件上传"+e.getMessage());
+        }
+        //执行jar命令
+
+
         channel.disconnect();
         channelSftp.disconnect();
         sshSession.disconnect();
@@ -125,11 +140,10 @@ public class JSchUtils {
 
     /**
      * 服务器上执行shell命令
-     * @param scpConnectEntity 服务器实体对象信息
      * @param command 执行的shell命令
      * @return
      */
-    public static ResultEntity execCmd(ScpConnectEntity scpConnectEntity, String command){
+    public static ResultEntity execCmd(String command){
         int code = -1;
         String message = "";
         try {
@@ -168,6 +182,5 @@ public class JSchUtils {
         }
         return new ResultEntity(code, message);
     }
-
 
 }

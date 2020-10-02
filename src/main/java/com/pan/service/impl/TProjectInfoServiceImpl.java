@@ -144,11 +144,11 @@ public class TProjectInfoServiceImpl implements TProjectInfoService {
         projectServerMap.put("projectId", id);
         List<TServerInfoQuery> tServerInfoLists = tProjectServerDao.findTServerInfoLists(projectServerMap);
         //多线程执行项目上传
-        for (TServerInfoEntity tServerInfo : tServerInfoLists) {
+        for (TServerInfoQuery tServerInfo : tServerInfoLists) {
             /**
              * 第四步 在多线程执行中进行执行 重启项目
              */
-            UploadServerTask task = new UploadServerTask(new File(""), "", tServerInfo);
+            UploadServerTask task = new UploadServerTask(jarUrl, tServerInfo);
             ThreadPoolServiceUtils.getInstance().execute(task);
         }
     }
