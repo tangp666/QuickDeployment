@@ -147,7 +147,7 @@ public class TServerInfoController extends BaseController{
         ResultEntity resultEntity = new ResultEntity();
         try {
             //服务器密码加密
-            tServerInfoEntity.setServerPassword(ShiroUtils.sha256(tServerInfoEntity.getServerPassword(),""));
+            //tServerInfoEntity.setServerPassword(ShiroUtils.sha256(tServerInfoEntity.getServerPassword(),""));
             tServerInfoEntity.setCreateTime(new Date());
             tServerInfoEntity.setCreateUserId(ShiroUtils.getUserId());
             int insert = tServerInfoService.insert(tServerInfoEntity);
@@ -213,10 +213,10 @@ public class TServerInfoController extends BaseController{
         try {
             //判断密码是否修改
             TServerInfoEntity oldEntity = tServerInfoService.findById(tServerInfoEntity.getId());
-            //如果密码相同则不加密 不同即为修改过密码 需要加密
+            /*//如果密码相同则不加密 不同即为修改过密码 需要加密
             if(!oldEntity.getServerPassword().equals(tServerInfoEntity.getServerPassword())){
                 tServerInfoEntity.setServerPassword(ShiroUtils.sha256(tServerInfoEntity.getServerPassword(),""));
-            }
+            }*/
             int update = tServerInfoService.update(tServerInfoEntity);
             //保存成功 储存关系信息
             if(update > 0){

@@ -17,29 +17,39 @@
 
     <!-- 通过菜单条件查询菜单信息集合 -->
     <select id="findByParames" resultType="com.pan.entity.SysMenuEntity" parameterType="java.util.Map">
-        select * from sys_menu
+        SELECT
+          sy.id,sy.parent_id,sy.name,sy.url,sy.perms,sy.type,sy.icon,sy.order_num
+        FROM
+          sys_menu sy
+        LEFT JOIN sys_role_menu srm ON sy.id = srm.menu_id
+        LEFT JOIN sys_role sr ON sr.id = srm.role_id
+        LEFT JOIN sys_user_role sur ON sur.role_id = srm.role_id
         where 1 = 1
         <if test="ids != null and ids.size() > 0">
-            and id in
+            and sy.id in
             <foreach collection="ids" item="id" open="(" close=")" separator=",">
                 #{id}
             </foreach>
         </if>
         <if test="parentId != null and parentId != ''">
-            and parent_id = #{parentId}
+            and sy.parent_id = #{parentId}
         </if>
         <if test="name != null and name != ''">
-            and name = #{name}
+            and sy.name = #{name}
         </if>
         <if test="url != null and url != ''">
-            and url like CONCAT('%', #{url} ,'%')
+            and sy.url like CONCAT('%', #{url} ,'%')
+        </if>
+        <if test="userId != null and userId != ''">
+            and sur.user_id = #{userId}
         </if>
         <if test="menuType != null and menuType.size > 0">
-            and type in
+            and sy.type in
             <foreach collection="menuType" item="type" open="(" close=")" separator=",">
                 #{type}
             </foreach>
         </if>
+        GROUP BY sy.id, sy.parent_id, sy. NAME, sy.url, sy.perms, sy.type, sy.icon, sy.order_num
         <!--<if test="limit != null and offset != null">-->
             <!--LIMIT #{offset} , #{limit}-->
         <!--</if>-->
