@@ -37,21 +37,7 @@ public class ExecCmdUtils {
         scpConnectEntity.setUserName(userName);
         scpConnectEntity.setPassWord(passWord);
         scpConnectEntity.setProt(prot == -1 ? 22 : prot);
-
-        int code = -1;
-        String message = "";
-        //创建ftp连接
-        try {
-            ResultEntity resultEntity = JSchUtils.jschConnect(scpConnectEntity);
-            if (MacroelementUtils.ZERO != resultEntity.getCode()){
-                code = ResultEnum.EXCEPTION.getCode();
-                message = "连接服务器失败";
-                throw new JSchException("连接服务器失败");
-            }
-        } catch (JSchException e) {
-            e.printStackTrace();
-        }
-        return JSchUtils.execCmd(command);
+        return JSchUtils.execCmd(scpConnectEntity, command);
     }
 
 }

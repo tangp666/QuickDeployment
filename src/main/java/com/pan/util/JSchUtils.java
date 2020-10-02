@@ -23,12 +23,17 @@ public class JSchUtils {
     private static com.jcraft.jsch.Session sshSession = null;
     private static Channel channel = null;
 
+    private static final String SFTP = "sftp";
+    private static final String SHELL = "exec";
+
+
     /**
      * 连接ftp服务器
      * @param scpConnectEntity 服务器信息
+     * @param type 连接方式
      * @return
      */
-    public static ResultEntity jschConnect(ScpConnectEntity scpConnectEntity) throws JSchException{
+    public static ResultEntity jschConnect(ScpConnectEntity scpConnectEntity, String type) throws JSchException{
         JSch jSch = new JSch();
         //返回对象
         int code = -1;
@@ -45,7 +50,7 @@ public class JSchUtils {
             sshSession.setPassword(scpConnectEntity.getPassWord());
             sshSession.connect();
 
-            channel = sshSession.openChannel("sftp");
+            channel = sshSession.openChannel(type);
             channel.connect();
 
             code = ResultEnum.SUCCESS.getCode();
@@ -68,20 +73,16 @@ public class JSchUtils {
      * @throws JSchException
      */
     public static boolean createDir(ScpConnectEntity scpConnectEntity, String fileUrl, String remoteFileName) throws JSchException{
-        ResultEntity resultEntity = jschConnect(scpConnectEntity);
+        ResultEntity resultEntity = jschConnect(scpConnectEntity, SFTP);
         if(MacroelementUtils.ZERO != resultEntity.getCode()){
             throw new JSchException("服务器连接失败!");
         }
 
         ChannelSftp channelSftp = (ChannelSftp)channel;
-        if(isDirExist(scpConnectEntity.getTargetPath(), channelSftp)){
-            channel.disconnect();
-            channelSftp.disconnect();
-            sshSession.disconnect();
-            return true;
-        }else {
+        StringBuffer filePath=new StringBuffer("/");
+        //当前没有目录时，创建目录
+        if(!isDirExist(scpConnectEntity.getTargetPath(), channelSftp)){
             String[] pathArry = scpConnectEntity.getTargetPath().split("/");
-            StringBuffer filePath=new StringBuffer("/");
             for (String path : pathArry) {
                 if (path.equals("")) {
                     continue;
@@ -104,14 +105,31 @@ public class JSchUtils {
         }
         //上传文件
         try {
+            // 进入指定目录
+            if("/".equals(filePath.toString())){
+                String[] pathArry = scpConnectEntity.getTargetPath().split("/");
+                for (String path : pathArry) {
+                    if (path.equals("")) {
+                        continue;
+                    }
+                    filePath.append(path + "/");
+                }
+            }
+            channelSftp.cd(filePath.toString());
             channelSftp.put(fileUrl, remoteFileName, ChannelSftp.OVERWRITE);
         } catch (SftpException e) {
             e.printStackTrace();
             throw new JSchException("SFTP服务器文件上传"+e.getMessage());
         }
         //执行jar命令
-
-
+        try {
+            channelSftp.cd(filePath.toString());
+            ResultEntity resultEntity1 = execCmd(scpConnectEntity, "java -jar " + remoteFileName);
+            System.out.println(resultEntity1.getMessage());
+        } catch (SftpException e) {
+            e.printStackTrace();
+            throw new JSchException("SFTP服务器执行命令"+e.getMessage());
+        }
         channel.disconnect();
         channelSftp.disconnect();
         sshSession.disconnect();
@@ -143,12 +161,14 @@ public class JSchUtils {
      * @param command 执行的shell命令
      * @return
      */
-    public static ResultEntity execCmd(String command){
+    public static ResultEntity execCmd(ScpConnectEntity scpConnectEntity,  String command){
         int code = -1;
         String message = "";
         try {
-            //执行命令
-            channel = sshSession.openChannel("exec");
+            ResultEntity resultEntity = jschConnect(scpConnectEntity, SHELL);
+            if(MacroelementUtils.ZERO != resultEntity.getCode()){
+                throw new JSchException("服务器连接失败!");
+            }
             ((ChannelExec) channel).setCommand(command);
             InputStream in = channel.getInputStream();
             channel.connect();
